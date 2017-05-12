@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>数据关联</title>
+    <link rel="stylesheet" href="../css/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/button/buttons.css"/>
+    <link rel="stylesheet" href="../css/font-awesome-3.2.1/css/font-awesome.min.css"/>
+    <style>
+    #dsg-association-list{
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ddd;
+        width: 800px;
+        height: 550px;
+        position: absolute;
+        top: 50%;
+        left:50%;
+        margin: -275px 0 0 -400px;
+    }
+    .dsg-association-head{
+        border-bottom:1px solid #dddddd;
+        height: 50px;
+        line-height: 50px;
+    }
+    .modal-hide{
+        font-size: 18px;
+        color: #dddddd;
+        font-weight:500;
+        cursor: pointer;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+    .dsg-association-head>span{
+        font-size: 20px;
+        margin-left: 20px;
+    }
+    .dsg-association-body{
+        height: 450px;
+        border-bottom: 1px solid #dddddd;
+    }
+    .dsg-association-body .dsg-list-group{
+        /*border: 1px solid #dddddd;*/
+        margin-top:20px;
+        max-height: 400px;
+    }
+    .dsg-association-body .list-group{
+        height: 30px;
+        line-height: 30px;
+        background: #3399FF;
+        text-align: center;
+    }
+    .dsg-association-body .list-group>span{
+        display: inline-block;
+        color: #ffffff;
+        width: 150px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .dsg-group{
+        position: relative;
+        margin: 10px 0px;
+    }
+    /*拖动模块*/
+    .dropContainer{
+        padding: 15px;
+        box-sizing: content-box;
+        min-height: 160px;
+        overflow: auto;
+        border: 1px dotted #ccc;
+        position: relative;
+        min-width: 30px;
+    }
+    .dsg-remove{
+        position: absolute;
+        top: 0px;
+        right: 1px;
+        z-index: 3;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+    }
+    .relative-wrap{
+        position: relative;
+        /*width: 100%;*/
+        max-width: 1600px;
+        /*box-sizing:border-box;*/
+        white-space:nowrap;
+        float: left;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 160px;
+        display: inline-flex;
+    }
+    .dsg-grop-table{
+        padding: 5px;
+        box-sizing: content-box;
+        min-height: 200px;
+        overflow: auto;
+        border: 1px solid #ccc;
+        position: relative;
+        min-width: 30px;
+    }
+    /*脚步*/
+    .dsg-association-foot{
+        height: 46px;
+        line-height: 46px;
+    }
+    .dsg-association-foot>input{
+        display: inline-block;
+        box-shadow: none;
+        height: 30px;
+    }
+    .dsg-association-foot>button{
+        margin: 0px 10px;
+    }
+    .move{
+        border: 1px solid #0071c5;
+        border-radius: 3px;
+        background: #d2d2d2;
+        opacity: 0.5;
+        color: #006600;
+        height: 30px;
+        line-height:30px;
+        position: absolute;
+        z-index:1000000;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 150px;
+        overflow: hidden;
+    }
+    .dropMove{
+        /*list-style-type: none;*/
+        float: left;
+        cursor:move;
+        text-align:center;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        width: 190px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        overflow: hidden;
+        background:#E7E7E7;
+        border-radius: 3px;
+        border: 0 solid #CCC;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding-right:10px;
+    }
+    /*连接线*/
+    #line-node{
+        /*display: none;*/
+        float: left;
+        height:1px;
+        width: 135px;
+        background-color: #BBB;
+        position: relative;
+        top: 20px;
+    }
+    #line-node:hover{
+        opacity: .5;
+    }
+    #line-node i:first-child{
+        position: absolute;
+        top: -1.5px;
+        left: -1.5px;
+        width: 3px;
+        height:3px;
+        border-radius:50%;
+        background: #BBB;
+    }
+    #line-node i:last-child{
+        position: absolute;
+        top: -1.5px;
+        right:-1.5px;
+        width: 3px;
+        height:3px;
+        border-radius:50%;
+        background: #BBB;
+    }
+    #line-node em{
+        background: url("../images/dataAnalysis/weiguanl.png") no-repeat;
+        display: inline-block;
+        width: 39px;
+        height: 24px;
+        border: 0 solid #888;
+        position: absolute;
+        top: -6px;left: 58px;
+        background-size: 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+    /*菜单项*/
+    .line-menu-list{
+        /*display: none;*/
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        background:#999999;
+        font-size: 20px;
+        text-align: center;
+    }
+    .line-menu-list a{
+        text-decoration: none;
+        color: #ffffff;
+    }
+    .line-menu-list a:hover{
+        opacity: .5;
+        cursor: pointer;
+    }
+    /*小模态框*/
+    select{
+        outline: none;
+    }
+    #autoRelativeDialog {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        /*display: none;*/
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+    }
+    .dsg-modal{
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        /*display: none;*/
+        overflow: hidden;
+        outline: 0;
+    }
+    .dsg-modal-wrap{
+        display: table;
+        height: 100%;
+        margin: 0 auto;
+    }
+    .dsg-modal-dialog{
+        position: relative;
+        margin: 10px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .dsg-modal-content{
+        width: 522px!important;
+        border: 1px solid #dddddd;
+        background: #ffffff;
+        /*max-height: 400px;*/
+        position: relative;
+        background-color: #fff;
+        background-clip: padding-box;
+        outline: 0;
+        box-shadow: 0 8px 28px rgba(0,0,0,.3);
+        border-radius: 6px;
+    }
+    /*头部*/
+    .dsg-modal-header{
+        height: 60px;
+        padding: 20px 30px;
+        border-bottom: 1px solid #e5e5e5;
+        position: relative;
+    }
+    button.close{
+        opacity: 1;
+        width: 21px;
+        background: #ddd;
+        border-radius: 50%;
+        outline: none;
+        top: -4px;
+        position: absolute;
+        right: -4px;
+        margin-top: -2px;
+        -webkit-appearance: none;
+        padding: 0;
+        font-size: 21px;
+        line-height: 1;
+        border: 0;
+        cursor: pointer;
+    }
+    .dsg-modal-title {
+        font-size: 20px;
+        font-weight: 400;
+        color: #666;
+    }
+    /*模态框身体*/
+    .modal-body{
+        position: relative;
+        padding: 20px 30px;
+        min-width: 300px;
+    }
+    .line-edit-wrap{
+        width: 460px;
+        border: 1px solid #AAA;
+        line-height: 32px;
+        background: #FFF;
+    }
+    .line-edit-wrap select{
+        width: 100%;
+        height: 100%;
+        line-height: 30px;
+        border: 0;
+        padding-left: 1em;
+        color: #555;
+    }
+    .line-type-item{
+        width: 25%;
+        height: 60px;
+        float: left;
+        border-left: 1px #AAA solid;
+        /*background: center 10px no-repeat;*/
+        text-align: center;
+        padding-top: 30px;
+        position: relative;
+    }
+    .line-type-item:first-child{
+        border-left: 0px;
+    }
+    .inner{
+        background: url("../images/dataAnalysis/neibu.png") center 10px no-repeat;
+    }
+    .left{
+        background: url("../images/dataAnalysis/zuoce.png") center 10px no-repeat;
+    }
+    .right{
+        background: url("../images/dataAnalysis/youce.png") center 10px no-repeat;
+    }
+    .full{
+        background: url("../images/dataAnalysis/weiguanl.png") center 10px no-repeat;
+    }
+    .current{
+        background-color: #CCC;
+    }
+    .mask{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: #FFF;
+        position: absolute;
+        opacity: .7;
+    }
+    .line-type-item:hover{
+        background-color: #CCC;
+    }
+    .line-table-wrap{
+        border: 1px solid #AAA;
+        border-left-width: 0;
+        border-right-width: 0;
+        box-sizing: content-box;
+        clear: both;
+    }
+    .line-table-item{
+        width: 50%;
+        height: 100%;
+        float: left;
+        border-left: 1px #AAA solid;
+        line-height: 32px;
+    }
+    .line-table-item:first-child{
+        border-left: 0px;
+    }
+    .line-field-item {
+        /*border-bottom: 1px #AAA solid;*/
+        position: relative;
+    }
+    .line-field-item:after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .line-field-remove{
+        width: 20px;
+        height: 20px;
+        line-height: 18px;
+        border: 1px solid #AAA;
+        border-radius: 50%;
+        background:#FFF;
+        position: absolute;
+        right: 6px;
+        top: 5px;
+        text-align: center;
+    }
+    .line-field-item>div{
+        height: 100%;
+        float: left;
+        border-left: 1px #AAA solid;
+    }
+    .line-field-item>div:first-child{
+        border-left: 0px;
+    }
+    .line-field-field{
+        width: 45%;
+        text-align: center;
+        /*border-bottom: 1px #AAA solid;*/
+    }
+    .line-field-gap{
+        width: 10%;
+        text-align: center;
+        /*border-bottom: 1px #AAA solid;*/
+    }
+    .line-add-field{
+        padding-left: 1em;
+        color: #AAA;
+    }
+    .line-add-field a{
+        text-decoration: none;
+        display: inline-block;
+        padding: 2px 6px;
+    }
+    #association-fadeIn{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        background-color: #333333;
+        opacity: .3;
+    }
+</style>
+</head>
+<body>
+<!--<div id="line-node"></div>-->
+<button id="btn">
+    dianwo
+</button>
+<div id="association">
+    <!--<div id="association-fadeIn"></div>-->
+    <div id="dsg-association-list">
+    <div class="association-list">
+        <div class="dsg-association-head">
+            <span>关联表</span>
+            <strong class="icon-remove modal-hide" style=""></strong>
+        </div>
+        <div class="dsg-association-body" style="position:relative;">
+                <div class="col-md-3">
+                    <div class="dsg-list-group">
+
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="condition">
+                        <div class="dsg-group">
+                            <a href="#" class="dsg-remove"><img src="../images/dataAnalysis/remove.png" alt=""/></a>
+                            <div class="dropContainer">
+                                <p class="drop-info" style="font-size: 12px;color: #DBDBDB">请拖入你想关联的数据</p>
+                                <div class="relative-wrap">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dsg-group">
+                            <div class="dsg-grop-table" style = "display: none">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="autoRelativeDialog" style="display: none;">
+                    <div class="dsg-modal">
+                        <div class="dsg-modal-wrap">
+                            <div class="dsg-modal-dialog">
+                                <div class="dsg-modal-content animation">
+                                    <div class="dsg-modal-header">
+                                        <span class="icon-Setthewindow"></span>
+                                        <button type="button" class="close">
+                                            <span>×</span>
+                                        </button>
+                                        <h4 class="modal-title dsg-modal-title">数据表关联设置<span></span>
+                                        </h4>
+                                    </div>
+                                    <div class="dsg-modal-body modal-body line-menu-edit-wrap-content">
+                                        <div class="line-menu" data-index="0" data-type="inner">
+                                            <div class="line-edit-wrap">
+                                                <div class="line-type-wrap">
+                                                    <div class="line-type-item inner current"  data-value="inner">内部</div>
+                                                    <div class="line-type-item left" data-value="left">左侧</div>
+                                                    <div class="line-type-item right" data-value="right">右侧<div class="mask" title="暂未开放"></div></div>
+                                                    <div class="line-type-item full" data-value="full">完全外部<div class="mask" title="暂未开放"></div></div>
+                                                </div>
+                                                <div class="line-table-wrap">
+                                                    <div class="line-table-item">
+                                                        <select name="table1"></select>
+                                                    </div>
+                                                    <div class="line-table-item">
+                                                        <select name="table2"></select>
+                                                    </div>
+                                                    <div style="clear: both"></div>
+                                                </div>
+                                                <div class="line-field-wrap">
+                                                    <div class="line-field-item">
+                                                        <div class="line-field-field">
+                                                            <select name="field1"><option value="">===请选择===</option></select>
+                                                        </div>
+                                                        <div class="line-field-gap">
+                                                            =
+                                                        </div>
+                                                        <div class="line-field-field">
+                                                            <select name="field2"><option value="">===请选择===</option></select>
+                                                        </div>
+                                                        <!--<a href="javascript:" class="line-field-remove icon-remove" title="删除此行"></a>-->
+                                                    </div>
+                                                </div>
+                                                <!--<div class="line-add-field">-->
+                                                    <!--<a href="javascript:;" data-click="line-menu-field-add" style="color:#555">添加新的关联字段</a>-->
+                                                <!--</div>-->
+                                                <div style="clear:both"></div>
+                                            </div>
+                                            <div class="text-right">
+                                                <a class="dsg-btn-1" href="javascript:" style="margin-top:20px;">保存</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+        </div>
+        <div class="dsg-association-foot text-right">
+            <span style="display: none;">请编辑关联~</span>
+            <span class="tip-warp"  style="display: none;">关联已刷新</span>
+            <span class="redstar" style="color: red">*</span>
+            <input type="text" placeholder="在这里输入保存的名称"/>
+            <button class="btn btn-info">确认</button>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../js/jquery/jquery.js"></script>
+<script src="../js/jquery/jquery-ui.js"></script>
+<script type="application/javascript">
+    $(function() {
+        $.ajax("../json/dataAnalysisJson/dataRelevance.json").done(function (data) {
+            var _data = data;
+            console.log(_data);
+
+            $(_data.dataList).each(function(index,val){
+                $('.dsg-list-group').append($('<div class="list-group">' +
+                        '<span data-value="'+index+'">'+_data.dataList[index].listName+'</span>' +
+                        '</div>'));
+            });
+            $('.list-group').draggable({
+                cursor: "move",
+                revert: "invalid",
+                helper: "clone",
+                stop: function () {
+                    $('.dropContainer').css({'border': '1px dotted #ccc'});
+                }
+            });
+            $('.dropContainer').droppable({
+                activeClass: "active",
+                hoverClass: "hover",
+                drop: function (event, ui) {
+                    var _helper = ui.helper;
+                    var drop = _helper[0];
+                    //console.log(drop.attr("data-value"))
+                    var dropedList = $('.dropContainer .dropMove span');
+                    var dropBox = _helper.find('span');
+                    var isHave = false;
+                    for (var i = 0; i < dropedList.length; i++) {
+                        if ($(dropedList[i]).attr('data-value') == dropBox.attr('data-value')) {
+                            isHave = true;
+                        }
+                    }
+                    if (isHave) {
+                        return false;
+                    }
+                    var _drop = $(drop).clone().removeAttr("class").removeAttr("style").addClass("dropMove");
+                    if (dropedList.length > 0){
+                        $('.relative-wrap').append('<div id="line-node"><i></i><em id="em"></em><i></i></div>')
+                    }
+                    $(_drop).appendTo('.relative-wrap');
+                    $('.drop-info').hide();
+                }
+             });
+
+        //删除容器的内容
+        $('.dsg-remove').on('click', function () {
+            $('.relative-wrap').html('');
+            $('.drop-info').show();
+        });
+        //自动生成删除编辑
+        var btn_, target;
+        function handleClick(e, menuHtml) {
+            var ck;
+            if (target) {
+                $(target).attr('ck', true);
+            }
+            $(btn_).remove();
+            var xx = e.pageX;
+            var yy = e.pageY;
+            if ($(e.target).attr("ck")) {
+                ck = $(e.target).attr("ck");
+            } else {
+                ck = true;
+            }
+            console.log(ck);
+            if (ck) {
+                btn_ = $(menuHtml);
+                btn_.css({'position': 'absolute', "top": (yy-30) + 'px', "left": (xx - 30) + 'px'});
+                $('body').append(btn_);
+                $('.menu-remove').bind('click',function(e){
+                    $(target).parents('#line-node').remove();
+                });
+                //小模态框
+                $('.menu-eidt').bind('click',function(e){
+                    console.log(target);
+                    var $elem=$(target).parent();
+                    var _prev = $($elem).prev();
+                    var _next = $($elem).next();
+                    console.log(_prev.children('span').attr('data-value'),_next.children('span').attr('data-value'));
+                    var pdataVal = _prev.children('span').attr('data-value');
+                    var ndataVal = _next.children('span').attr('data-value');
+                    $('[name="table1"]').append($('<option selected>'+_prev.text()+'</option>'));
+                    $('[name="table2"]').append($('<option selected>'+_next.text()+'</option>'));
+                    for(var k =0;k<_data.dataList[pdataVal].listDimension.length;k++){
+                        $('[name="field1"]').append($('<option value="'+k+'">'+_data.dataList[pdataVal].listDimension[k]+'</option>'))
+                    }
+                    for(var j =0;j<_data.dataList[ndataVal].listDimension.length;j++){
+                        $('[name="field2"]').append($('<option value="'+j+'">'+_data.dataList[ndataVal].listDimension[j]+'</option>'))
+                    }
+                    $('#autoRelativeDialog').show();
+                });
+                target = e.target;
+                ck = false;
+            } else {
+                $('.list-down').remove();
+                ck = true;
+            }
+            $(e.target).attr("ck", ck);
+            e.stopPropagation();
+        }
+        var menu = '<div class="line-menu-list">' +
+                '<a class="icon-trash menu-remove" title="删除"></a>' +
+                '<a class="icon-pencil menu-eidt" title="编辑"></a>' +
+                '</div>';
+
+        function creat() {
+            $('.relative-wrap').delegate('em', 'click', function (e) {
+                handleClick(e, menu);
+            });
+            $('body').on('click', function () {
+                if (target) {
+                    $(target).attr('ck', true);
+                }
+                $(btn_).remove();
+
+            });
+        }
+
+        creat();
+        $('.close').on('click',function(){
+            console.log("akjajaj")
+            $('[name*="table"]>option').remove();
+            $('[name*="field"]>option').remove();
+            $('#autoRelativeDialog').hide();
+        });
+        $('.line-type-item').on('click',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+        });
+        $('.line-field-wrap').delegate('.line-field-remove','click',function(){
+            //console.log(target)
+            $(this).parent().remove();
+        });
+//        $('.line-add-field').on('click',function(){
+//            var addline = $('<div class="line-field-item"><div class="line-field-field"><select name="field1"><option value="">===请选择===</option><option value="6575285">正课</option></select> </div><div class="line-field-gap">=</div><div class="line-field-field"><select name="field2"><option value="">===请选择===</option><option value="6575297">正课:</option></select> </div> <a href="javascript:;" class="line-field-remove icon-remove" title="删除此行"></a> </div>')
+//            $('.line-field-wrap').append(addline);
+//        });
+        //点击保存
+        $('.dsg-btn-1').on('click',function(){
+            //$('#autoRelativeDialog').hide();
+            var dataVal = $('.current').attr('data-value');
+            console.log(dataVal)
+            var selOptVal1 = $('[name="table1"]>option:selected').val();
+            var selOptVal2 = $('[name="table2"]>option:selected').val();
+            console.log(selOptVal1,selOptVal2);
+            var selOptValF1 = $('[name="field1"]>option:selected').attr('value');
+            var selOptValF2 = $('[name="field2"]>option:selected').attr('value');
+            console.log(selOptValF1,selOptValF2);
+            //$('.dsg-grop-table').show();
+            if(dataVal = 'inner'){
+                console.log("inner")
+            }else if(dataVal = 'left'){
+                console.log("left")
+            }else if(dataVal = 'right'){
+                console.log('right');
+            }else{
+                console.log('full')
+            }
+        })
+        });
+    })
+
+</script>
+</body>
+</html>

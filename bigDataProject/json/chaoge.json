@@ -1,0 +1,30 @@
+{
+  "app": {
+    "id": "application_1477082855824_0001",
+    "user": "sqoop2",
+    "name": "Sqoop: testflow1477040944303",
+    "queue": "root.sqoop2",
+    "state": "RUNNING",
+    "finalStatus": "UNDEFINED",
+    "progress": "56.428574",
+    "trackingUI": "ApplicationMaster",
+    "trackingUrl": "http://cdh01:8088/proxy/application_1477082855824_0001/",
+    "clusterId": "1477082855824",
+    "applicationType": "MAPREDUCE",
+    "startedTime": "1477084019392",
+    "finishedTime": "0",
+    "elapsedTime": "33736",
+    "amContainerLogs": "http://cdh03:8042/node/containerlogs/container_1477082855824_0001_01_000001/sqoop2",
+    "amHostHttpAddress": "cdh03:8042",
+    "allocatedMB": "4096",
+    "allocatedVCores": "4",
+    "runningContainers": "4",
+    "memorySeconds": "139160",
+    "vcoreSeconds": "131",
+    "preemptedResourceMB": "0",
+    "preemptedResourceVCores": "0",
+    "numNonAMContainerPreempted": "0",
+    "numAMContainerPreempted": "0",
+    "logAggregationStatus": "NOT_START"
+  }
+}

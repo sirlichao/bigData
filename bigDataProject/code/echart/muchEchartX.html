@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>配置多个echart的多个X轴</title>
+</head>
+<body>
+<div id="echart" style ="width: 100%;height: 500px;"></div>
+<script src="../../js/echarts/dist/echarts.js"></script>
+<script>
+    var mychart = echarts.init(document.getElementById('echart'));
+    var option = {
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: [
+            {x: '7%', y: '7%', width: '38%', height: '38%'},
+            {x2: '7%', y: '7%', width: '38%', height: '38%'},
+        ],
+        xAxis : [
+            {
+                type : 'category',
+                data : ['111', '222', '333', '444', '555', '666', '777'],
+                axisTick: {
+                    alignWithLabel: true
+                },
+                gridIndex:0
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                gridIndex:0
+            }
+        ],
+        series : [
+            {
+                name:'直接访问',
+                type:'bar',
+                barWidth: '60%',
+                data:[10, 52, 200, 334, 390, 330, 220]
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+</body>
+</html>

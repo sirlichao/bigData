@@ -1,0 +1,327 @@
+
+
+body,ul,li,a,span,ol,div,nav,header,footer,button,p,form{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+.rt{
+    float:right;
+}
+.lf{
+    float: left;
+}
+.cl{
+    clear: both;
+}
+.navbar-fixed-top{
+    background: #fff;
+    /*border-bottom: 1px solid #9d9d9d;*/
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #dddddd;
+}
+/*导航条部分*/
+#list{
+    list-style-type: none;
+    text-align: center;
+    height: 50px;
+}
+#list>li>a{
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    width: 80px;
+    font-size: 14px;
+    text-decoration: none;
+}
+#list>li>a:hover{
+    border: 1px solid #9d9d9d;
+    border-top: 3px solid #0E8FE8;
+    border-bottom:0;
+    background: #F8F8F8;
+    color: #333333;
+    z-index: 50;
+}
+#list>li:hover>ul {
+    display: block;
+}
+#list>li{
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 50px;
+}
+#list>li>ul{
+    overflow:hidden;
+    border: 1px solid #9d9d9d;
+    background: #F8F8F8;
+    border-top: 0px;
+    width: 130px;
+    height: auto;
+    position: absolute;
+    top: 49px;
+    right: 0px;
+    display: none;
+}
+#list>li>ul>li{
+    text-align: center;
+    width: 130px;
+    height: 40px;
+}
+#list>li>ul>li>a{
+    display: inline-block;
+    width: 130px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+}
+#list>li>ul>li>a:hover{
+    background: #ffffff;
+    text-decoration: none;
+}
+#navList{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background: #dddddd;
+    border-radius: 50%;
+}
+/*<!--页脚部分-->*/
+.footer{
+    height: 60px;
+    line-height: 60px;
+    background: #D1D1D1;
+}
+.btn{
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 100px;
+    height: 40px;
+}
+.text{
+    float: right;
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-radius: 2px;
+    background: #FFFFFF;
+    outline: none;
+}
+/*************/
+b.userName{
+    color: #008000;
+    position: relative;
+    top: 58px;
+    left: 100px;
+    font-weight: normal;
+}
+.data-preview{
+    height: 400px;
+    margin-top: 100px;
+    background: #FFFFFF;
+    border: 1px solid #dddddd;
+    position: relative;
+
+}
+.data-preview>p{
+    font-size: 14px;
+    /*font-weight: bold;*/
+    height: 40px;
+    line-height: 40px;
+    backgroung:#ffffff;
+    position: absolute;
+    top: -30px;
+    left: 0px;
+}
+.data-preview>.preview{
+    position: absolute;
+    top: -21px;
+    right: 0px;
+}
+/*tabs标签页*/
+[id^='tal-']{
+    max-height: 360px;
+    overflow: auto;
+    /*border-bottom: 1px solid #DDDDDD;*/
+}
+.tab-list{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    min-height: 30px;
+    width: 100%;
+    background: #ddd;
+}
+.list-inline{
+    padding: 0px;
+    margin: 0px;
+}
+.tab-list>li{
+    height: 25px;
+    line-height: 25px;
+}
+.tab-list>li>a{
+    display: inline-block;
+    outline: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #0E8FEA;
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 1px;
+    padding: 0px;
+    outline: none;
+    cursor: pointer;
+}
+.active{
+    background: #FFFFFF;
+}
+.body{
+    background: #F9F9F9;
+    height: 650px;
+}
+
+.dsg-modal{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1040;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+.fadeIn{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1040;
+    background: #dddddd;
+    opacity: 0.1;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+.dsg-content{
+    text-align: center;
+    position: relative;
+}
+.content{
+    text-align: center;
+    width: 500px;
+    height: 260px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 140px 0px 0px -250px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    z-index: 2000;
+}
+.title{
+    width: 500px;
+    height: 50px;
+    line-height: 50px;
+    background: #0b9df1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /*margin-left: -15px;*/
+}
+.title>span{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+}
+.wait{
+    margin: 40px 0px 50px 0px;
+}
+.wait>span{
+    color: #059BF0;
+    font-size: 16px;
+    font-weight: 700;
+}
+.pro1{
+    width: 400px;
+    margin: 0 auto;
+}
+img{
+    width: 32px;
+    height: 32px;
+}
+
+/*删除模态框*/
+#point-del{
+    display: none;
+}
+.del-fadeIn{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: .3;
+    z-index: 1;
+    background-color: #000;
+}
+.del-content{
+    width: 350px;
+    height: 150px;
+    background: #ffffff;
+    box-shadow: 0px 0px 5px #dddddd;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -150px;
+    z-index: 3;
+}
+.del-header{
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+    border-bottom: 1px solid #dddddd;
+}
+.del-header>p{
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.del-header>a{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 28px;
+    font-weight: 500;
+    text-decoration: none;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.del-body{
+    width: 100%;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+    font-size: 21px;
+    color: #666;
+}

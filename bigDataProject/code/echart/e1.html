@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>各种图标展示</title>
+    <link rel="stylesheet" href="../../css/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <script type="application/javascript" src="../../js/echarts/dist/echarts.js"></script>
+    <script type="application/javascript" src="../../js/jquery/jquery.js"></script>
+</head>
+<body>
+    <div id="e1" class="col-md-4" style=" height: 400px;"></div>
+    <div id="e2" class="col-md-4" style=" height: 400px;"></div>
+    <div id="e3" class="col-md-4"style=" height: 400px;"></div>
+    <script>
+        $(function(){
+            var myChart=echarts.init(document.getElementById('e1'))
+            var option = {
+                title: {
+                    text: '',
+                    left: 'left',
+                    top: 'bottom'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    orient: 'vertical',
+                    top: 'center',
+                    feature: {
+                        dataView: {readOnly: false},
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: []
+                },
+                calculable: true,
+                series: [
+                    {
+                        name: '漏斗图',
+                        type: 'funnel',
+                        data:[]
+                    },
+                ]
+            };
+            $.ajax('../../json/chart.json').done(function (data){
+                var data = data;
+                console.log(data)
+                option.title.text = data.title;
+                option.legend.data = data.dimension;
+                option.series[0].data=[];
+                for(var i=0;i<data.metric.length; i++) {
+                    option.series[0].data.push( {value:data.metric[i], name:data.dimension[i]});
+                }
+                myChart.setOption(option)
+            })
+        });
+        $(function(){
+            var myChart=echarts.init(document.getElementById('e2'))
+            option = {
+                title : {
+                    text: '南丁格尔玫瑰图',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    x : 'center',
+                    y : 'bottom',
+                    data:[]
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'半径模式',
+                        type:'pie',
+                        radius : [20, 110],
+                        center : ['25%', '50%'],
+                        roseType : 'radius',
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        lableLine: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:[]
+                    },
+                    {
+                        name:'面积模式',
+                        type:'pie',
+                        radius : [30, 110],
+                        center : ['75%', '50%'],
+                        roseType : 'area',
+                        data:[]
+                    }
+                ]
+            };
+            $.ajax('../../json/chart.json').done(function (data){
+                var data = data;
+                console.log(data)
+                option.title.text = data.title;
+                option.legend.data = data.dimension;
+                option.series[0].data=[];
+                for(var i=0;i<data.metric.length;i++){
+                    option.series[0].data.push({value:data.metric[i],name:data.dimension[i]})
+                    option.series[1].data.push({value:data.metric[i],name:data.dimension[i]})
+                }
+                myChart.setOption(option)
+            })
+        })
+        $(function(){
+            var myChart = echarts.init(document.getElementById('e3'));
+            var option ={
+                title:{
+                    text:"雷达图",
+                    x:'right',
+                    y:'bottom'
+                },
+                tooltip:{
+                    tigger:'item',
+                    backgroundColor:'rgba(0,0,250,0.4)'
+                },
+                legend:{
+                    data:(function(){
+                        var List=[];
+                        for(var i=1;i<=28;i++){
+                            List.push(2000+i+' ')
+                        }
+                        return List;
+                    })()
+                },
+                visualMap:{
+                    color:['blue','red']
+                },
+                radar:{
+                    indicator:[
+                        {text:'IE8-',max:400},
+                        {text:'IE9+',max:400},
+                        {text:'chrome',max:400},
+                        {text:'safari',max:400},
+                        {text:'firefox',max:400}
+                    ]
+                },
+                series:(function(){
+                    var series=[]
+                    for(var i=1;i<=28;i++){
+                        series.push({
+                            name:'浏览器（数量纯属虚构）',
+                            type:'radar',
+                            symbol:'none',
+                            itemStyle:{
+                                normal:{
+                                    lineStyle:{
+                                        width:1
+                                    }
+                                },
+                                emphasis:{
+                                    areaStyle:{color:'rgba(0,250,0,0.3)'}
+                                }
+                            },
+                            data:[
+                                {
+                                    value:[
+                                        (40-i)*10,
+                                        (38-i)*4+60,
+                                            i*5+10,
+                                            i*9,
+                                            i*12
+                                    ],
+                                    name: i+2000+" "
+                                }
+                            ]
+                        })
+                    }
+                    return series;
+                })()
+            }
+            myChart.setOption(option)
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "status":200,
+  "dataList":[
+    {
+      "listName":"超市零售",
+      "listDimension":["订单日期","发货日期","邮寄方式","订单ID"]
+    },
+    {
+      "listName":"能源行业",
+      "listDimension":["年份","地方区域"]
+    },
+    {
+      "listName":"环境工程",
+      "listDimension":["台风名","台风等级","台风区域"]
+    }
+  ]
+}

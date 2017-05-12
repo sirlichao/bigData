@@ -1,0 +1,318 @@
+
+body,ul,li,a,span,ol,div,nav,header,footer,button,p,form{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+.rt{
+    float:right;
+}
+.lf{
+    float: left;
+}
+.cl{
+    clear: both;
+}
+#mian{
+    background:#fff;
+    /*height: 1000px;*/
+    position: relative;
+    clear: both;
+}
+.navbar-fixed-top{
+    background: #fff;
+    /*border-bottom: 1px solid #9d9d9d;*/
+    height: 50px;
+    line-height: 50px;
+}
+/*导航条部分*/
+#list{
+    list-style-type: none;
+    text-align: center;
+    height: 50px;
+}
+#list>li>a{
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    width: 80px;
+    font-size: 14px;
+    text-decoration: none;
+}
+#list>li>a:hover{
+    border: 1px solid #9d9d9d;
+    border-top: 3px solid #0E8FE8;
+    border-bottom:0;
+    background: #F8F8F8;
+    color: #333333;
+    z-index: 50;
+}
+#list>li:hover>ul {
+    display: block;
+}
+#list>li{
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 50px;
+}
+#list>li>ul{
+    overflow:hidden;
+    border: 1px solid #9d9d9d;
+    background: #F8F8F8;
+    border-top: 0px;
+    width: 130px;
+    height: auto;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    display: none;
+}
+#list>li>ul>li{
+    text-align: center;
+    width: 130px;
+    height: 40px;
+}
+#list>li>ul>li>a{
+    display: inline-block;
+    width: 130px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+}
+#list>li>ul>li>a:hover{
+    background: #ffffff;
+    text-decoration: none;
+}
+#navList{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background: #009DDC;
+    border-radius: 50%;
+}
+/*搜索框样式的设点**/
+#form{
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid #9d9d9d;
+    border-radius:1px ;
+    background: #F0F0F0;
+    z-index: 50;
+}
+#form>form{
+    width: 1100px;
+}
+#form>form>label>input[type="text"]{
+    display: inline-block;
+    width: 400px;
+    height: 40px;
+    border: 1px solid #dddddd;
+    margin-left: 100px;
+    border-radius: 20px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+    font-weight: normal;
+}
+#form>form>label>span{
+    float: right;
+    padding: 10px;
+    background: url("../images/search.jpg") no-repeat;
+    background-size:20px 20px ;
+    position: relative;
+    top: 21px;
+    right: 30px;
+}
+/****主体内容*****/
+#mian_1{
+    position: relative;
+    top: 120px;
+    /*border: 1px solid #e4303c;*/
+    /*background: #F9F9F9;*/
+}
+#mian_1>div.c1{
+    width: 900px;
+    /*border-bottom: 1px solid #979797 ;*/
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    clear: both;
+    background: #F9F9F9;
+    border-radius: 5px;
+}
+#mian_1>div.c1>span{
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 3px solid #1AA1FF;
+}
+#mian_1>div.c1>div.c2{
+    /*border: 1px solid #0E8FE8;*/
+    border-top: 1px solid #979797 ;
+    height:300px;
+
+}
+#mian_1>div.c1>div.c2:hover{
+    cursor: pointer;
+}
+#mian_1>div.c1>div.c3:hover{
+    cursor:auto;
+}
+#mian_1>div.c1>div.c2>span{
+    display: inline-block;
+    /*width: 300px;*/
+    /*height: 200px;*/
+    padding: 63px 135px;
+    border: 1px dotted #dddddd;
+    margin: 40px 0 0 300px;
+    color: #dddddd;
+    /*margin: 0 auto;*/
+    /*text-align: center;*/
+}
+#mian_1>div.c1>div.c2>p{
+    margin: 10px 260px;
+}
+#mian_1>div.c1>div.c2>span:hover{
+    border: 1px dotted #0E8FE8;
+    color: #0E8FE8;
+}
+/****实例展示*****/
+.project{
+    position: relative;
+    width: 180px;
+    /*border: 1px solid #398439;*/
+    vertical-align: middle;
+    margin-top: 20px;
+    /*text-align: center;*/
+
+
+}
+.project>.firstRadius{
+    width: 140px;
+    height: 5px;
+    border: 1px solid #dddddd;
+    margin: 0 auto;
+    border-bottom: 0;
+    border-radius: 5px;
+    background: #ffffff;
+}
+.project>.secondRadius{
+    width: 160px;
+    height: 5px;
+    border: 1px solid #dddddd;
+    margin: 0 auto;
+    border-bottom: 0;
+    border-radius: 5px;
+    background: #ffffff;
+}
+.project>.third{
+    width: 180px;
+    height: 250px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    background: #ffffff;
+    text-align: center;
+
+}
+.project>.third>a.bgImg{
+    cursor: pointer;
+}
+.project:hover>div{
+    box-shadow: 2px 2px 5px #ddd inset;
+}
+.project>.tips{
+    color: #ffffff;
+    padding-right: 12px;
+    padding-bottom: 20px;
+    background:url("../images/demo.png") 0px 0px no-repeat;
+}
+.footer{
+    height: 40px;
+}
+.footer>a.rt{
+    width: 44px;
+    height: 40px;
+    background: url(../images/heloques.png) no-repeat;
+    position: fixed;
+    bottom: 0px;
+    outline: none;
+    border: 0px;
+    right: 3px;
+    padding: 26px;
+    z-index: 998;
+    cursor: pointer;
+    opacity: 1;
+}
+ .go_next{
+     width:200px;
+     height: 200px;
+     position: relative;
+     float: left;
+ }
+.go_next:hover{
+    background: #ffd700;
+    border-radius: 10px;
+    /*text-align: center;*/
+    /*outline: none;*/
+    cursor: pointer;
+}
+.go_next:hover>#go_next1,.cl_4{
+    background: #fff;
+
+}
+#go_next1{
+    width: 150px;
+    height: 100px;
+    border-left:1px solid #000;
+    border-bottom:1px solid #000;
+    /*margin:0 auto;*/
+    position: absolute;
+    top: 50px;
+    left: 25px;
+
+}
+#go_next1>div.cl_1{
+    width:25px;
+    height:25px;
+    background: #7571cd;
+    position: absolute;
+    bottom:0px;
+    left: 15px;
+}
+#go_next1>div.cl_2{
+    width:25px;
+    height:50px;
+    background: #e1787c;
+    position: absolute;
+    bottom:0px;
+    left: 55px;
+}
+#go_next1>div.cl_3{
+    width:25px;
+    height:75px;
+    background: #3dbd5c;
+    position: absolute;
+    bottom:0px;
+    left: 95px;
+}
+.go_next>div.cl_4{
+    width: 150px;
+    height: 100px;
+    border: 2px dotted #dddddd;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ddd;
+    line-height: 100px;
+    position: absolute;
+    top:50px;
+    left:25px;
+}

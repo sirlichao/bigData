@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>主界面</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css"/>
+    <link rel="stylesheet" href="../css/model.css"/>
+</head>
+<body>
+    <div id="mian">
+        <div class="nav navbar-default navbar-fixed-top">
+            <div class="container">
+                <div style="width: 200px" class="lf">
+                   <a href="#"> <img src="../images/logo2.png" style="width: 90px;"/></a>
+                    <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;应用列表</span>
+                </div>
+                <div class="rt">
+                    <ul id="list">
+                        <li>
+                            <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                            <ul>
+                                <li class="" data-toggle="modal" data-target="#myModal">
+                                    <a href="#">添加数据源</a>
+                                </li>
+                                <li><a href="#">导入Excel</a></li>
+                                <li><a href="#">数据市场</a></li>
+                            </ul>
+                        </li>
+                        <li data-target="#myModal" data-toggle="modal">
+                            <a href="#">数据分析</a>
+                        </li>
+                        <li>
+                            <a href="#">数据挖掘&nbsp;<span class="caret"></span></a>
+                            <ul>
+                                <li><a href="" data-toggle="modal" data-target="#myModal">聚类分析</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#myModal">数据预测</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#myModal">关联分析</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#myModal">相关性分析</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#myModal">决策树</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#myModal">营销解决方案</a></li>
+                            </ul>
+                        </li>
+                        <li data-toggle="modal" data-target="#myModal">
+                            <a href="#">仪表盘</a>
+                        </li>
+                        <li>
+                            <a href="#">设置&nbsp;<span class="caret"></span></a>
+                            <ul>
+                                <li><a href="">资源管理</a></li>
+                                <li><a href="">权限管理</a></li>
+                                <li><a href="">邀请用户</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span id="navList">DSG&nbsp;</span><span class="caret"></span></a>
+                            <ul>
+                                <li><a href="#">15690053779</a></li>
+                                <li><a href="">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="form"class="container">
+            <form action="">
+                <label>
+                    <input type="text"placeholder="输入应用列表名/数据源名/仪表盘/图表名进行搜索"/>
+                    <span></span>
+                </label>
+                <button class="btn btn-info rt" style="margin-top: 13px"data-toggle="modal" data-target="#myModal">新建应用</button>
+            </form>
+        </div>
+        <div id="mian_1">
+            <div class="c1">
+                &nbsp;&nbsp;&nbsp;&nbsp;<span>我的应用</span>
+                <div class="c2">
+                    <span style="font-size: 50px;">+</span>
+                    <p>你还没有自己的应用，赶快点击<a href="#"style="color: #1AA1FF">“新建应用”</a>开启你的体验之旅</p>
+                </div>
+            </div>
+
+            <div class="c1">
+                &nbsp;&nbsp;&nbsp;&nbsp;<span>示例应用</span>
+                <div class="c2 c3">
+                    <div class="project">
+                        <div class="firstRadius"></div>
+                        <div class="secondRadius"></div>
+                        <span class="tips lf">demo</span>
+                        <div class="third">
+                            <a class="bgImg">
+                                <img src="../images/yidong.png"style="width: 170px;height: 140px;">
+                            </a>
+                            <div class="projectName">
+                                <span class="lastUpdate ng-binding">创建时间:2015/1/30</span>
+                                <div title="某移动公司">某移动公司</div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <a href="" class="rt"></a>
+        </div>
+    </div>
+
+
+<!--//模态框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="myModalLabel">选择应用</h3>
+                </div>
+                <div class="modal-body"style="overflow: hidden;width: 620px">
+                    <div class="go_next">
+                        <div id="go_next1">
+                            <div class="cl_1"></div>
+                            <div class="cl_2"></div>
+                            <div class="cl_3"></div>
+                        </div>
+                        <p class="p1">新建文本文档</p>
+                    </div>
+                    <div class="go_next">
+                        <div CLASS="cl_4">
+                            +
+                        </div>
+                        <p class="p2">新建应用</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- 引入 jQuery 文件 -->
+<script src="../js/jquery/jquery.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../js/bootstrap/bootstrap.js"></script>
+<script>
+   // alert(localStorage.token)
+    $("#go_next").click(function() {
+        window.location.href = "../lianzxi/轮播.html"
+    })
+</script>
+</body>
+</html>

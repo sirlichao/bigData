@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>echart右键事件</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/button/buttons.css"/>
+    <link rel="stylesheet" href="../css/font-awesome-3.2.1/css/font-awesome.min.css"/>
+    <script src="../js/echarts/dist/echarts.js"></script>
+    <style>
+        #chartArea{
+            margin-top: 40px;
+            height:400px;
+        }
+        .rightEchart{
+            margin: 0px;
+            max-height: 60px;
+            background: #fff;
+            width: 100px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .dsg-backDrop{
+            /*display:none;*/
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            bottom: 0px;
+            background: #000;
+            opacity: 0.2;
+            transition-duration: .5s;
+            transition-timing-function: cubic-bezier(.36,1.1,.2,1);
+        }
+        /*模态框*/
+        .view-data-model{
+            /*display: none;*/
+        }
+        .dsg-modal-dialog{
+            position: absolute;
+            border-radius: 5px;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 400px;
+            margin: -200px 0px 0px -400px;
+            background: #FFFFFF;
+            z-index: 10;
+            box-shadow: 0px 0px 3px #ddd;
+        }
+        .dsg-modal-head{
+            height: 50px;
+            line-height: 50px;
+        }
+        .dsg-modal-head>p{
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div id="chartArea" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+<div id="app">
+    <div class="rightEchart" style="display: none;">
+        <div type="button" title="查看数据" style="cursor: pointer;">
+            <label style="font-weight: 400"  @click="show">查看数据</label>
+        </div>
+        <div type="button" title="探索" style="cursor: pointer;">
+            <label style="font-weight: 400">探索</label>
+        </div>
+    </div>
+    <div class="view-data-model"  v-show="isShow">
+        <div class="dsg-backDrop" style="" v-show="isShow" @click="isShow=false"></div>
+        <div class="dsg-modal-dialog">
+            <div class="dsg-modal-content">
+                <div class="dsg-modal-head" style="border-bottom: 1px solid #ddd;margin-bottom: 10px;">
+                    <p class="col-md-10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看数据</p>
+                    <button class="button button-circle button-tiny col-md-2" @click="isShow=false" style="float: right;"><i class=" icon-remove"></i></button>
+                </div>
+                <div class="dsg-modal-body">
+                    <div class="dsg-table">
+                        <div class="text-center" style="margin-bottom: 10px">
+                            <button class="button button-raised button-caution" @click="accordion(1)" style="margin-right: 10px">摘要</button>
+                            <button class="button button-raised button-royal" @click="accordion(2)" style="margin-left: 10px">明细</button>
+                        </div>
+                        <div class="dsg-table text-center" style="height: 230px;border-bottom: 1px solid #DDDDDD;overflow: auto;padding: 15px">
+                            <div v-if="tal=='1'">
+                                <table class="table table-responsive table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td v-for="(key,value) in data.supermarket.head">{{key}}</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td v-for="(key,value) in data.supermarket.body">{{key}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div v-else>
+                                <h3>hehehhehehheheh</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dsg-modal-foot" style="height: 60px;line-height: 60px;text-align: right">
+                    <a class="button button-action button-rounded" @click="isShow=false" style="margin-right: 10px;">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery/jquery.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../js/bootstrap/bootstrap.js"></script>
+<script src="../js/vue-2.0.1/dist/vue.js"></script>
+<script>
+
+</script>
+<script>
+    $(function() {
+        var option={
+            title:{
+                text:"饼图",
+                subtext:"纯属虚构",
+                x:'center'
+            },
+            tooltip:{
+                trigger:'item',
+                formatter:"{a}<br/>{b}:{c}({d}%)"
+            },
+            legend:{
+                orient:'vertical',
+                left:'left',
+                data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+            },
+            series : [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:335, name:'直接访问'},
+                        {value:310, name:'邮件营销'},
+                        {value:234, name:'联盟广告'},
+                        {value:135, name:'视频广告'},
+                        {value:1548, name:'搜索引擎'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        }
+        var myChart=echarts.init(document.getElementById('chartArea'));
+
+        document.oncontextmenu = function () { return false; };
+        //新加上鼠标右击事件
+        myChart.on('contextmenu', function (params) {
+            console.log("右键事件");
+            var x = event.pageX;
+            var y = event.pageY;
+            $('.rightEchart').show();
+            $('.rightEchart').css({'position':'absolute',"top":(y+5)+'px',"left":x+'px'});
+            console.log(params);
+        });
+        myChart.setOption(option);
+        $('body').on('click',function(){
+            $('.rightEchart').hide();
+        });
+//        var data1={
+//            "fieldId": 169760,
+//            "totalCount": 15000,
+//            "validCount": 1110,
+//            "invalidCount": 2010,
+//            "nulls": 300,
+//            "empties": 3000,
+//            "uniqueValues": 15000,
+//            "lastCheckTime": "2017-03-23T09:18:50.600Z",
+//            "nextCheckTime": "2017-03-23T09:18:50.608Z",
+//            "sample": {
+//                "columnNames": ["sid","sname","sex","dep_action_time_ts"],
+//                "valid": [
+//                    ["1","李四","男","2016-09-20 13:44:24.0"],
+//                    [ "2","张哈喽","男","2016-09-21 13:44:24.0"],
+//                    ["5","王二","男","2016-09-21 13:44:24.0"]],
+//                "invalid":[["6","王五","男","2016-09-22 13:44:24.0"],
+//                    ["8","王九","女","2016-09-23 13:44:24.0"],
+//                    ["10","王为","男","2016-09-25 13:44:24.0"],
+//                    ["11","肖一","女","2016-09-25 13:44:24.0"]],
+//                "empties":[
+//                    ["12","","男","2016-09-25 13:44:24.0"],
+//                    ["16","肖得劲","女","2016-09-25 13:45:24.0"]]
+//            }
+//        }
+
+        var data={
+            "status":200,
+            "supermarket":{
+                "head":["点单ID","订单日期","订单数量"],
+                "body":["1001","2001-09-09","2000"]
+            }
+        }
+        new Vue({
+            el:"#app",
+            data:{
+                data:data,
+                isShow:false,
+                tal:'1',
+                isActive:true
+            },
+            mounted:function(){
+            },
+            methods:{
+               show:function(){
+                   this.isShow = true
+               },
+                accordion:function(t){
+                    if(t==1){
+                        this.tal=1
+                    }else{
+                        this.tal=2
+                        this.isActive=false
+                    }
+                }
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

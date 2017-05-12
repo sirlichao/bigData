@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap动态警告框</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/H-ui/H-ui.css"/>
+    <link rel="stylesheet" href="../css/clusterAnalysis.css"/>
+    <script src="../js/angular/angular.js"></script>
+</head>
+<body>
+<div class="nav navbar-default navbar-fixed-top">
+    <div>
+        <div style="width: 200px" class="lf">
+            <a href="#"> <img src="../images/07.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据分析</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+
+                <li>
+                    <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="" data-toggle="modal" data-target="#myModal">
+                            <a href="#">添加数据源</a>
+                        </li>
+                        <li><a href="#">导入Excel</a></li>
+                        <li><a href="#">数据市场</a></li>
+                    </ul>
+                </li>
+                <li data-target="#myModal" data-toggle="modal">
+                    <a href="#">数据分析</a>
+                </li>
+                <li data-toggle="modal" data-target="#myModal">
+                    <a href="#">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#"><span id="navList" class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="#">15690053779</a></li>
+                        <li><a href="">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="dsg-mian">
+    <div class="dsg-left">
+        <div class="dsg-left-main">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href=".myData" role="tab" data-toggle="tab">我的数据</a></li>
+            </ul>
+            <div class="tab-content heightAll" data-spy="scroll">
+                <div role="tabpanel" class="tab-pane active myData">
+                    <div class="dsg-group-header">
+                        <div class="dsg-search">
+                            <form action="">
+                                <input type="text" class="search-txt" name="txt" id="search" placeholder="输入你搜索的内容"/>
+                                <span class="glyphicon glyphicon-search search"></span>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="dsg-group-scroll">
+                        <ul class="dsg-group-theme panel-group" id="accordion">
+                            <li></li>
+                            <li>
+                                <div class="addData">
+                                        <span>
+                                            你当前没有数据
+                                            <br/>
+                                            请点击添加
+                                        </span>
+                                </div>
+                            </li>
+                            <li class="list-drag">
+                                <div type="button" class="dragName"data-parent="#accordion" data-toggle="collapse" data-target="#demo" aria-expanded="true" aria-controls="demo">
+                                    <div class="dsg-myData">我dddddddddddddddd的数据</div>
+                                </div>
+                                <form action="" class="drag-rename">
+                                    <input type="text" style="width:150px;height: 25px;line-height: 25px;padding-right: 16px" name="text" class="text"/>
+                                    <img src="../images/yzwc.png" class="sure" style="width: 14px;" alt=""/>
+                                </form>
+                                <div class="btn-group dataName">
+                                    <span class="caret data-down" style="color: #fff;"></span>
+                                </div>
+                                <ul class="collapse in coll" id="demo">
+                                    <li>
+                                        <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">维度</span>
+                                        <div class="btn-group">
+                                            <span class="caret dimension-down"></span>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">heheheh</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">aaawdwaddadadadadaaaa</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">量度</span>
+                                        <div class="btn-group">
+                                            <span class="caret measure-down"></span>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content" >Wii</a>
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret measure-downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">我了</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret measure-downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-drag">
+                                <div type="button" class="dragName"data-parent="#accordion" data-toggle="collapse" data-target="#demo1" aria-expanded="true" aria-controls="demo1">
+                                    <div class="dsg-myData">我的数据</div>
+                                </div>
+                                <form action="" class="drag-rename">
+                                    <input type="text" style="width:150px;height: 25px;line-height: 25px;padding-right: 16px" name="text" class="text"/>
+                                    <img src="../images/yzwc.png" class="sure" style="width: 14px;" alt=""/>
+                                </form>
+                                <div class="btn-group dataName">
+                                    <span class="caret data-down" style="color: #fff;"></span>
+                                </div>
+                                <ul class="collapse in coll" id="demo1">
+                                    <li>
+                                        <div class="dimension" style="height: 20px;line-height: 20px;position: relative">
+                                            <span style="font-size: 14px;font-weight: bold;position: absolute;top: 0px;left: 3px;">维度</span>
+                                            <div class="btn-group">
+                                                <span class="caret dimension-down"></span>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">aaawdwaddadadadadaaaa</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">awaaaa</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="measure" style="height: 20px;line-height: 20px;position: relative">
+                                            <span style="font-size: 14px;font-weight: bold;position: absolute;top: 0px;left: 3px;">量度</span>
+                                            <div class="btn-group">
+                                                <span class="caret measure-down"></span>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">aaavv</a>
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret measure-downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">aaawdwaddadadadadaaaa</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret measure-downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="publicData">...</div>
+                <div role="tabpanel" class="tab-pane" id="exampleData">.. ds .</div>
+            </div>
+        </div>
+    </div>
+    <div class="dsg-center row">
+        <div ng-app="dsgLichaoApp">
+            <div ng-controller="lichaoCtrl">
+                <h3 style="color: #000;">
+                    分析结果
+                </h3>
+                <h3 style="color: #000;">度量分组情况</h3>
+
+                <div class="" ng-show="true" style="max-height: 450px;overflow-y: auto;">
+                    <table class="table table-responsive table-striped table-bordered table-hover">
+                        <thead>
+                        </thead>
+                        <tbody class="">
+                        <tr class="" ng-repeat="dataRow in dataRows" style=" ">
+                            <!--<td>{{dataRows}}</td>-->
+                            <td style="text-align: left" class="">{{dataRow.tdata}}</td>
+                            <td style="text-align: left" class="">
+                                <ul>
+                                    <li ng-repeat="lis in dataRow.tdata1"><span>{{lis.range0}}</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="action-list"></div>
+
+</div>
+
+<!-- 引入 jQuery 文件 -->
+<script src="../js/jquery/jquery.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../js/bootstrap/bootstrap.js"></script>
+</body>
+<style>
+
+</style>
+<script>
+
+    var myApp = angular.module('dsgLichaoApp',[]);
+    myApp.controller('lichaoCtrl',['$scope','$http',function($scope, $http){
+        $scope.isShow = false;
+        $scope.show = function() {
+            $scope.dataRows=[];
+            $http.get('../json/xiang.json')
+                    .success(function(data) {
+                        if(data.code == 200) {
+                            $scope.dataRows = (data.data);
+                        }
+                    })
+        }
+
+        $scope.show();
+    }]);
+</script>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据分析</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/model.css"/>
+    <!--<link rel="stylesheet" href="../css/index.css"/>-->
+    <style>
+
+        body,ul,li,a,span,ol,div,nav,header,footer,button,p,form{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+        }
+        .rt{
+            float:right;
+        }
+        .lf{
+            float: left;
+        }
+        .cl{
+            clear: both;
+        }
+        .navbar-fixed-top{
+            background: #fff;
+            /*border-bottom: 1px solid #9d9d9d;*/
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #dddddd;
+        }
+        /*导航条部分*/
+        #list{
+            list-style-type: none;
+            text-align: center;
+            height: 50px;
+        }
+        #list>li>a{
+            display: inline-block;
+            height: 49px;
+            line-height: 49px;
+            width: 80px;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        #list>li>a:hover{
+            border: 1px solid #9d9d9d;
+            border-top: 3px solid #0E8FE8;
+            border-bottom:0;
+            background: #F8F8F8;
+            color: #333333;
+            z-index: 50;
+        }
+        #list>li:hover>ul {
+            display: block;
+        }
+        #list>li{
+            position: relative;
+            float: left;
+            width: 80px;
+            height: 50px;
+        }
+        #list>li>ul{
+            overflow:hidden;
+            border: 1px solid #9d9d9d;
+            background: #F8F8F8;
+            border-top: 0px;
+            width: 130px;
+            height: auto;
+            position: absolute;
+            top: 49px;
+            right: 0px;
+            display: none;
+        }
+        #list>li>ul>li{
+            text-align: center;
+            width: 130px;
+            height: 40px;
+        }
+        #list>li>ul>li>a{
+            display: inline-block;
+            width: 130px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 12px;
+        }
+        #list>li>ul>li>a:hover{
+            background: #ffffff;
+            text-decoration: none;
+        }
+        #navList{
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background: #009DDC;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav navbar-default navbar-fixed-top">
+    <div class="container">
+        <div style="width: 200px" class="lf">
+            <a href="#"> <img src="../images/logo2.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据分析</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+                <li>
+                    <a href="#">新建文本...</a>
+                    <ul>
+                        <li><a href="#">应用列表</a></li>
+                        <li><a href="#">新建列表</a></li>
+                        <li><a href="#">新建文本文档</a></li>
+                        <li><a href="#">某移动公司</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="" data-toggle="modal" data-target="#myModal">
+                            <a href="#">添加数据源</a>
+                        </li>
+                        <li><a href="#">导入Excel</a></li>
+                        <li><a href="#">数据市场</a></li>
+                    </ul>
+                </li>
+                <li data-target="#myModal" data-toggle="modal">
+                    <a href="#">数据分析</a>
+                </li>
+                <li>
+                    <a href="#">数据挖掘&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li><a href="" data-toggle="modal" data-target="#myModal">聚类分析</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#myModal">数据预测</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#myModal">关联分析</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#myModal">相关性分析</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#myModal">决策树</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#myModal">营销解决方案</a></li>
+                    </ul>
+                </li>
+                <li data-toggle="modal" data-target="#myModal">
+                    <a href="#">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#">设置&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li><a href="">资源管理</a></li>
+                        <li><a href="">权限管理</a></li>
+                        <li><a href="">邀请用户</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span id="navList">DSG&nbsp;</span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="#">15690053779</a></li>
+                        <li><a href="">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 引入 jQuery 文件 -->
+<script src="../js/jquery/jquery.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../js/bootstrap/bootstrap.js"></script>
+</body>
+</html>

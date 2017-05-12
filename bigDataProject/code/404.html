@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="refresh" >
+
+<title>404btitle>
+<style>
+
+  @-moz-keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}@-webkit-keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}@-o-keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}@keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}embed,object{animation-duration:.001s;-ms-animation-duration:.001s;-moz-animation-duration:.001s;-webkit-animation-duration:.001s;-o-animation-duration:.001s;animation-name:nodeInserted;-ms-animation-name:nodeInserted;-moz-animation-name:nodeInserted;-webkit-animation-name:nodeInserted;-o-animation-name:nodeInserted;}</style>
+  <style type="text/css">
+   body{
+     margin-top: 105px;
+   }
+    </style>
+</head>
+<table width="630" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+  </tr>
+  <tr>
+    <td height="60" bgcolor="#FFFFFF"><table border="0" align="center" cellpadding="0" cellspacing="0">
+        <tbody><tr>
+          <td width="230"><a href="#"><img src="../images/404.jpg" alt="???ʧ??404????????ҳ?" style="border:0;"></a></td>
+          <td width="400" align="center" style="color:#333333; font-size:16px; font-weight:bold;"><p>??ࡣ?ҳ?ľ????Ŷ??<strong style="font-size:18px;color:red;">5</strong> ??֮??????????????/p>
+            <p>???Ե???? <a href="Login.html">??????/a> ???<a href="register">?ҳ</a></p></td>
+        </tr>
+      </tbody></table></td>
+  </tr>
+</tbody></table>
+<script src="../js/jquery/jquery.js"></script>
+<script type="application/javascript">
+    function remainTime(){
+        var i=parseInt($("strong").html());
+        i--;
+        $("strong").html(i--);
+        if(i<0){
+            location.href='Login.html';
+        }
+
+        setTimeout("remainTime()",1000);
+    }
+    remainTime();
+</script>
+</body>
+</html>

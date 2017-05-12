@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue列表</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../../css/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../js/DataTables-1.10.12/media/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="../../css/button/buttons.css"/>
+    <link rel="stylesheet" href="vueList.css"/>
+    <style>
+        body,ul,li,a,span,ol,div,nav,header,footer,button,p,form{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+        }
+        .rt{
+            float:right;
+        }
+        .lf{
+            float: left;
+        }
+        .cl{
+            clear: both;
+        }
+        .navbar-fixed-top{
+            background: #fff;
+            /*border-bottom: 1px solid #9d9d9d;*/
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #dddddd;
+        }
+        /*导航条部分*/
+        #list{
+            list-style-type: none;
+            text-align: center;
+            height: 50px;
+        }
+        #list>li>a{
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+            width: 80px;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        #list>li>a:hover{
+            border: 1px solid #9d9d9d;
+            border-top: 3px solid #0E8FE8;
+            border-bottom:0;
+            background: #F8F8F8;
+            color: #333333;
+            z-index: 50;
+        }
+        #list>li:hover>ul {
+            display: block;
+        }
+        #list>li{
+            position: relative;
+            float: left;
+            width: 80px;
+            height: 50px;
+        }
+        #list>li>ul{
+            overflow:hidden;
+            border: 1px solid #9d9d9d;
+            background: #F8F8F8;
+            border-top: 0px;
+            width: 130px;
+            height: auto;
+            position: absolute;
+            top: 49px;
+            right: 0px;
+            display: none;
+        }
+        #list>li>ul>li{
+            text-align: center;
+            width: 130px;
+            height: 40px;
+        }
+        #list>li>ul>li>a{
+            display: inline-block;
+            width: 130px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 12px;
+        }
+        #list>li>ul>li>a:hover{
+            background: #ffffff;
+            text-decoration: none;
+        }
+        #navList{
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background: #009DDC;
+            border-radius: 50%;
+        }
+        /*<!--页脚部分-->*/
+        .footer{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .footer>p{
+            font-size: 12px;
+            hieght:30px;
+            line-height: 30px;
+        }
+        .footer>a.rt{
+            width: 48px;
+            height: 48px;
+            background: url(../../images/heloques.png);
+            position: fixed;
+            bottom: 0px;
+            outline: none;
+            border: 0px;
+            right: 3px;
+            padding: 6px;
+            z-index: 998;
+            cursor: pointer;
+            opacity: 1;
+        }
+        /*。。列表。。*/
+
+    </style>
+</head>
+<body style="background: #F9F9F9;">
+    <div class="nav navbar-default navbar-fixed-top">
+    <div class="">
+        <div style="width: 200px" class="lf">
+            <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据分析</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+
+                <li>
+                    <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="" data-toggle="modal" data-target="#myModal">
+                            <a href="#">添加数据源</a>
+                        </li>
+                        <li><a href="#">导入Excel</a></li>
+                    </ul>
+                </li>
+                <li data-target="#myModal" data-toggle="modal">
+                    <a href="#">数据分析</a>
+                </li>
+                <li data-toggle="modal" data-target="#myModal">
+                    <a href="#">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#"><span id="navList" class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="#"><span aria-hidden="true"></span>
+                            演示账户</a></li>
+                        <li><a href="#">激活</a></li>
+                        <li><a href="">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div id="app" class="container" style="margin-top: 60px;background: #FFFFFF;">
+        <div class="text-danger">192.168.140</div>
+        <div class="tal-list" style="padding-bottom: 10px">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>选择数据表：</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-right">数据预览：100</p>
+                </div>
+            </div>
+            <div class="tal-content">
+                <div class="tal-content-list">
+                    <div class="wt100" style="position:relative; height:100%">
+                        <table id="example" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>
+                                    {{ser.listTableServceName}}
+                                </th>
+                                <th>
+                                    {{ser.listTableIP}}
+                                </th>
+                                <th>
+                                    {{ser.listTableCPU}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a class="clickdom" href="javascript:;" isclick="true" onClick="clickDom(this);">lsqtest</a>
+                                </td>
+                                <td>192.168.13.7</td>
+                                <td>3核/1G</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a class="clickdom" href="javascript:;" isclick="true" onClick="clickDom(this);">lsfdqtest</a>
+                                </td>
+                                <td>192.165.13.56</td>
+                                <td>1核/16G</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="clickdom" href="javascript:;" isclick="true" onClick="clickDom(this);">lsqtest</a>
+                                </td>
+                                <td>192.168.13.7</td>
+                                <td>3核/1G</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a>lsqtdfest</a>
+                                </td>
+                                <td>192.168.136.56</td>
+                                <td>1核/3G</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tal-bottom">
+                    <ul class="list-inline">
+                        <li v-for="(list,index) in tablelists">
+                            <a class="li-active" href="#javascript:;">{{list.listName}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="tal-foot nav navbar-fixed-bottom row">
+            <div class="col-md-8 text-right">
+                <button class="button button-rounded">上一步</button>
+            </div>
+            <div class="col-md-2 text-center">
+                <input type="text"/>
+            </div>
+            <div class="">
+                <button class="button button-glow button-rounded button-raised button-primary">保存</button>
+            </div>
+        </div>
+        <div class=""></div>
+    </div>
+<script src="../../js/vue-2.0.1/dist/vue.min.js"></script>
+<script src="../../js/vue-resurce/dist/vue-resource.min.js"></script>
+
+    <script type="application/javascript" src="../../js/DataTables-1.10.12/media/js/jquery.js"></script>
+    <script type="application/javascript" src="../../js/DataTables-1.10.12/media/js/jquery.dataTables.js"></script>
+    <script src="../../css/bootstrap/dist/js/bootstrap.js"></script>
+    <script>
+        $(function(){
+            var table=$("#example").DataTable({
+                sort:false,
+                "order": [
+                    [0, null]
+                ],//第一列排序图标改为默认
+                initComplete: function () {//列筛选
+                    var api = this.api();
+                    api.columns().indexes().flatten().each(function (i) {
+                        var column = api.column(i);
+                        var $span = $('<div class="btn-group">' +
+                                '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
+                                '<span class="caret"></span>' +
+                                '</a>' +
+                                '<ul class="dropdown-menu">' +
+                                '<li><a tabindex="-1" href="#"><span class="glyphicon glyphicon-trash">&nbsp;</span>删除</a>' +
+                                '</li>' +
+                                '<li>' +
+                                '<a tabindex="-1" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>自定义拆分</a>' +
+                                '</li>' +
+                                '</ul>' +
+                                '</div>').appendTo($(column.header())
+                        )
+                    });
+
+                }
+
+            });
+            //添加索引
+            table.on('order.dt search.dt',function(){
+                table.column(0,{
+                    search: 'applied',
+                    order:'applied'
+                }).nodes().each(function(cell,i){
+                    cell.innerHTML=i+1;
+                });
+            }).draw();
+            //自定义搜索
+            $('.dsearch').on('keyup click',function(){
+                var tsval=$('.dsearch').val();
+                table.search(tsval,false,false).draw();
+            });
+            //全选
+            $("#checkAll").on('click',function(){
+                if($(this).prop('checked')===true){
+                    $('input[type="checkbox"]').prop("checked",$(this).prop("checked"));
+                    $("#example tbody tr").addClass("selected");
+                }else{
+                    $("input[name='checkList']").prop("checked", false);
+                    $('#example tbody tr').removeClass('selected');
+                }
+            });
+            //显示隐藏列
+            $('.toggle-vis').on('change', function (e) {
+                e.preventDefault();
+                console.log($(this).attr('data-column'));
+                var column = table.column($(this).attr('data-column'));
+                column.visible(!column.visible());
+            });
+            //删除选中行
+            $('#example tbody').on('click', 'tr input[name="checkList"]', function () {
+                var $tr = $(this).parents('tr');
+                $tr.toggleClass('selected');
+                var $tmp = $('[name=checkList]:checkbox');
+                $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+
+            });
+
+            $('#button').click(function () {
+                table.row('.selected').remove().draw(false);
+            });
+
+            $('.showcol').click(function () {
+                $('.showul').toggle();
+
+            });
+            new Vue({
+                el:"#app",
+                data:{
+                    tablelists:[]
+                },
+                mounted:function(){
+                    this.$nextTick(function(){
+                        this.request();
+                    })
+                },
+                methods:{
+                    request:function(){
+                        var _this=this;
+                        this.$http.get('../../json/vueList.json').then(function(res){
+                            _this.tablelists=res.data.lists;
+                            console.log(_this.tablelists);
+                        })
+                    }
+                }
+            })
+        });
+
+    </script>
+</body>
+</html>

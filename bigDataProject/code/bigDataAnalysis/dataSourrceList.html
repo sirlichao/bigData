@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据源列表</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../../css/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../../js/icheck-1.x/skins/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/dataSourrceList.css"/>
+</head>
+<body>
+<div class="nav navbar-default navbar-fixed-top">
+    <div class="container">
+        <div style="width: 200px" class="lf">
+            <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据分析</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+
+                <li>
+                    <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="" data-toggle="modal" data-target="#myModal">
+                            <a href="#">添加数据源</a>
+                        </li>
+                        <li><a href="#">导入Excel</a></li>
+                    </ul>
+                </li>
+                <li data-target="#myModal" data-toggle="modal">
+                    <a href="#">数据分析</a>
+                </li>
+                <li data-toggle="modal" data-target="#myModal">
+                    <a href="#">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#"><span id="navList" class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="#"><span aria-hidden="true"></span>
+                            演示账户</a></li>
+                        <li><a href="#">激活</a></li>
+                        <li><a href="">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container select">
+    <p>选择数据表：</p>
+    <form action="" class="form">
+        <input type="text" name="sourrceList" id="sourrceList" placeholder="搜索表快速添加"/>
+        <span class="glyphicon glyphicon-search search"></span>
+    </form>
+    <div class="all">全选：<input type="checkbox" class="allCheck" /></div>
+    <div class="row dataCon">
+
+    </div>
+</div>
+<footer>
+    <div class="footer navbar-fixed-bottom">
+        <button class="btn btn-info rt" disabled>下一步</button>
+        <button class="btn btn-default rt">上一步</button>
+    </div>
+</footer>
+<div class="mask"></div>
+<!--模态框-->
+<div id="model">
+    <p style="font-size: 18px;margin-left: 10px;font-family: '微软雅黑';">提示：</p>
+    <div class="modal-body">
+        <p style="margin-left: 10px;font-family: '微软雅黑';">亲！最多支持十张表....</p>
+    </div>
+    <div class="model-foot">
+        <button id="btn" class="btn btn-danger">关闭</button>
+        <div style="clear: both;"></div>
+    </div>
+</div>
+<!-- 引入 jQuery 文件 -->
+<script src="../../js/jquery/jquery.js"></script>
+<script src="../../js/icheck-1.x/icheck.min.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<!--<script src="../js/bootstrap/bootstrap.js"></script>-->
+<script src="../../js/dataSourrceList.js"></script>
+<script type="application/javascript">
+    $(function(){
+//        $("#sourrceList").keyup(function(){
+//            $('div.dataCon>div').hide().filter(":contains('"+($(this).val())+"')").show();
+//        })
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+
+.progress{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    margin: -5px 0px 0px -500px;
+
+}
+img{
+    width: 50px;
+}
+.wait{
+    text-align: center;
+    /*background: #d2d2d2;*/
+    width: 400px;
+    height: 100px;
+    line-height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -200px;
+}
+.wait>span{
+    color: #006400;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "微软雅黑";
+}
+.img{
+    text-align: center;
+    /*background: #d2d2d2;*/
+    width: 400px;
+    height: 400px;
+    line-height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -200px 0px 0px -200px;
+}

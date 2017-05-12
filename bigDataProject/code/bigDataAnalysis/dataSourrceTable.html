@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据源列表数据预览</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../../css/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/dataSourrceTable.css"/>
+    <link rel="stylesheet" href="../../css/font-awesome-3.2.1/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../js/DataTables-1.10.12/media/css/jquery.dataTables.css"/>
+    <style>
+        .process{
+                position: relative;
+                top: 210px;
+                left: 45%;
+                /*margin: -50px 0 -50px 0;*/
+            }
+        #loading{
+            height: 100%;
+            width: 100%;
+            background: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: .5;
+            z-index: 2000;
+        }
+        #loading-center{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #loading-center-absolute{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 50px;
+        }
+        .object{
+            width: 8px;
+            height: 50px;
+            margin-right: 5px;
+            background-color: #FFFFFF;
+            -webkit-animation: animate 1s infinite;
+            -o-animation:animate 1s infinite;
+            animation:animate 1s infinite;
+            float: left;
+        }
+        .object:last-child{
+            margin-right: 0px;
+        }
+        .object:nth-child(10){
+            -webkit-animation-delay: 0.9s;
+            -moz-animation-delay: 0.9s;
+            -o-animation-delay: 0.9s;
+            animation-delay: 0.9s;
+            background: #554c8e;
+        }
+        .object:nth-child(9){
+            -webkit-animation-delay: 0.9s;
+            -moz-animation-delay: 0.9s;
+            -o-animation-delay: 0.9s;
+            animation-delay: 0.9s;
+            background: #ffbc35;
+        }
+        .object:nth-child(8){
+            -webkit-animation-delay: 0.8s;
+            -moz-animation-delay: 0.8s;
+            -o-animation-delay: 0.8s;
+            animation-delay: 0.8s;
+            background: #fff;
+        }
+        .object:nth-child(7){
+            -webkit-animation-delay: 0.7s;
+            -moz-animation-delay: 0.7s;
+            -o-animation-delay: 0.7s;
+            animation-delay: 0.7s;
+            background: #34bcd9;
+        }
+        .object:nth-child(6){
+            -webkit-animation-delay: 0.6s;
+            -moz-animation-delay: 0.6s;
+            -o-animation-delay: 0.6s;
+            animation-delay: 0.6s;
+            background: #73bfa1;
+        }
+        .object:nth-child(5){
+            -webkit-animation-delay: 0.5s;
+            -moz-animation-delay: 0.5s;
+            -o-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+            background: #e4bee3;
+        }
+        .object:nth-child(4){
+            -webkit-animation-delay: 0.4s;
+            -moz-animation-delay: 0.4s;
+            -o-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+            background: #51b7c2;
+        }
+        .object:nth-child(3){
+            -webkit-animation-delay: 0.3s;
+            -moz-animation-delay: 0.3s;
+            -o-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+            background: #554c8e;
+        }
+        .object:nth-child(2){
+            -webkit-animation-delay: 0.2s;
+            -moz-animation-delay: 0.2s;
+            -o-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+            background: #ffbc35;
+        }
+        .object:nth-child(1){
+            -webkit-animation-delay: 0.1s;
+            -moz-animation-delay: 0.1s;
+            -o-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+            background: #6990ad;
+        }
+        @-webkit-keyframes animate {
+            50% {
+                -ms-transform: scaleY(0);
+                -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+
+            }
+        }
+        @keyframes animate {
+            50% {
+                -ms-transform: scaleY(0);
+                -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+            }
+        }
+        /*拆分模态框*/
+        /*******model********/
+        .modal-content{
+            width: 500px;
+            height: 260px;
+            margin-top: 200px;
+        }
+        .modal-title{
+            font-size: 24px;
+        }
+        .close>span{
+            font-size: 50px;
+            font-weight: normal;
+        }
+        .modal-body{
+            height: 120px;
+            text-align: center;
+        }
+        .form{
+            margin: 5px 0px 10px 0px;
+        }
+        #txt{
+            display: inline-block;
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+            box-shadow: none;
+        }
+
+        .select{
+            width: 148px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .modal-backdrop{
+            z-index: 0;
+        }
+        /******************/
+        thead>tr>th{
+            position: relative;
+        }
+        .addselect select {
+            width: 44px;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+        }
+        .addselect select option{
+            color: #000;
+            width: 150px;height: 30px
+        }
+        table.dataTable tbody th, table.dataTable th, table.dataTable tbody td {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        table.dataTable thead th {
+            padding: 0 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="body">
+    <div class="nav navbar-default navbar-fixed-top">
+        <div class="">
+            <div style="width: 200px" class="lf">
+                <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+                <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据分析</span>
+            </div>
+            <div class="rt">
+                <ul id="list">
+
+                    <li>
+                        <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                        <ul>
+                            <li class="" data-toggle="modal" data-target="#myModal">
+                                <a href="#">添加数据源</a>
+                            </li>
+                            <li><a href="#">导入Excel</a></li>
+                        </ul>
+                    </li>
+                    <li data-target="#myModal" data-toggle="modal">
+                        <a href="#">数据分析</a>
+                    </li>
+                    <li data-toggle="modal" data-target="#myModal">
+                        <a href="#">仪表盘</a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="navList" class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                        <ul>
+                            <li><a href="#"><span aria-hidden="true"></span>
+                                演示账户</a></li>
+                            <li><a href="#">激活</a></li>
+                            <li><a href="">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <b class="userName">192.168.2.140</b>
+    <div class="container data-preview">
+        <p>选择数据表：</p>
+        <div class="preview">预览数据:&nbsp;<span>100</span></div>
+        <div class="tabs">
+            <div id="tal-1" style="overflow: auto;max-height: 380px">
+                <div class="wt100" style="position:relative; height:100%">
+                    <table id="example" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>
+                                服务器名称
+                            </th>
+                            <th>
+                                IP
+                            </th>
+                            <th>
+                                CPU/内存
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a class="clickdom" href="javascript:;" isclick="true" onClick="clickDom(this);">lsqtest</a>
+                            </td>
+                            <td>192.168.13.7</td>
+                            <td>3核/1G</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <a class="clickdom" href="javascript:;" isclick="true" onClick="clickDom(this);">lsfdqtest</a>
+                            </td>
+                            <td>192.165.13.56</td>
+                            <td>1核/16G</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="clickdom" href="javascript:;" isclick="true" onClick="clickDom(this);">lsqtest</a>
+                            </td>
+                            <td>192.168.13.7</td>
+                            <td>3核/1G</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="clickdom" href="javascript:;" isclick="true" onClick="clickDom(this);">lsqtdfest</a>
+                            </td>
+                            <td>192.168.136.56</td>
+                            <td>1核/3G</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="tal-2">
+                表二
+            </div>
+            <div id="tal-3">
+                表三
+            </div>
+            <ul class="tab-list list-inline">
+                <li class="active"><a href="#tal-1">列表1</a></li>
+                <li><a href="#tal-2">列表2</a></li>
+                <li><a href="#tal-3">列表3</a></li>
+            </ul>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <footer>
+        <div class="footer navbar-fixed-bottom">
+            <a class="btn btn-info rt">保存</a>
+            <input class="text" value="192.168.2.140">
+            <button class="btn btn-default rt">上一步</button>
+        </div>
+    </footer>
+</div>
+<!--拆分模态框-->
+<!-- model-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">自定义拆分</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" class="form">
+                    <span>使用分隔符</span>&nbsp;<input type="text" name="txt" id="txt"
+                                                   placeholder="输入要使用的分隔符，如：-,.;"/>
+                </form>
+                <div class="split">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span>拆分</span>
+                    <select name="" class="select">
+                        <option value="0">第一个</option>
+                        <option value="1">全部</option>
+                        <option value="2">最后一个</option>
+                    </select>
+                    <select name="" class="select">
+                        <option value="0">1列</option>
+                        <option value="1">2列</option>
+                        <option value="2">3列</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--删除的模态框-->
+<div id="point-del">
+    <div class="del-fadeIn"></div>
+    <div class="del-content">
+        <div class="del-header">
+            <p><span class="icon-lightbulb" style="color: red;"></span>&nbsp;提示</p>
+            <a class="del-close">×</a>
+        </div>
+        <div class="del-body">
+            表已关联！不能删除！
+        </div>
+    </div>
+</div>
+<!--模态框-->
+<div class="dsg-modal">
+    <div class="fadeIn"></div>
+    <div class="dsg-content">
+            <div class="content">
+                <div class="title">
+                    <span>数据源</span>
+                </div>
+                <div class="wait">
+                    <img src="http://static.oschina.net/uploads/space/2014/0430/115223_oFLD_1163935_thumb.gif"  alt=""/>
+                    <span>数据提交中请耐心等待......</span>
+                </div>
+                <div class="progress pro1">
+                    <div class="progress-bar progress-bar-striped submit" role="progressbar"
+                         aria-valuemin="0" aria-valuemax="100">
+                        <span class="span"></span>%
+                    </div>
+                </div>
+                <button id="btn1">点我</button>
+                <button id="btn2">来呀</button>
+            </div>
+    </div>
+</div>
+<!--进度条-->
+<div id="loading" style="display: none">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+        </div>
+    </div>
+</div>
+<!-- 引入 jQuery 文件 -->
+<script src="../../js/jquery/jquery.js"></script>
+<script type="application/javascript" src="../../js/DataTables-1.10.12/media/js/jquery.js"></script>
+<script type="application/javascript" src="../../js/DataTables-1.10.12/media/js/jquery.dataTables.js"></script>
+<script src="../../js/jquery/jquery-ui.js"></script>
+ <!--引入 Bootstrap 的 JS 文件 &ndash;&gt;-->
+<script src="../../js/bootstrap/bootstrap.js"></script>
+<script>
+    $(".tab-list>li").on("click",function(){
+        $(this).addClass("active").siblings().removeClass("active");
+    });
+    $(".btn-info").on("click",function(){
+        $('.dsg-modal').modal('show')
+    });
+    $('#btn1').on("click",function (){
+        $(".wait>img").attr("src","../images/ch3.png");
+        $(".wait>span").html("提交失败");
+        $(".submit").attr("aria-valuenow","100")
+                .css({"background":"red"}).css({"width":'400'});
+        $(".span").html("提交失败");
+    });
+    $('#btn2').on("click",function (){
+        $(".wait>img").attr("src","../images/ch4.png");
+        $(".wait>span").html("提交成功");
+        var t=setTimeout(function(){
+            $(".submit").attr("aria-valuenow","50").css({"width":'200'});
+            $(".span").html("50");
+        },2000)
+    });
+    $(function(){
+        $('.tabs').tabs();
+    });
+    $(function(){
+        var table=$("#example").DataTable({
+            sort:false,
+            bAutoWidth:false,
+            "order": [
+                [0, null]
+            ],//第一列排序图标改为默认
+            initComplete: function () {//列筛选
+                var api = this.api();
+                api.columns().indexes().flatten().each(function (i) {
+                    var column = api.column(i);
+                    var $span = $('<div class="btn-group">' +
+                            '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
+                            '<span class="caret"></span>' +
+                            '</a>' +
+                            '<ul class="dropdown-menu">' +
+                            '<li><a tabindex="-1" href="#" class="dsg-del-model"><span class="glyphicon glyphicon-trash">&nbsp;</span>删除</a>' +
+                            '</li>' +
+                            '<li>' +
+                            '<a tabindex="-1" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>自定义拆分</a>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>').appendTo($(column.header())
+                    )
+                });
+
+            }
+
+        });
+        //添加索引
+        table.on('order.dt search.dt',function(){
+            table.column(0,{
+                search: 'applied',
+                order:'applied'
+            }).nodes().each(function(cell,i){
+                cell.innerHTML=i+1;
+            });
+        }).draw();
+        //自定义搜索
+        $('.dsearch').on('keyup click',function(){
+            var tsval=$('.dsearch').val();
+            table.search(tsval,false,false).draw();
+        });
+        //全选
+        $("#checkAll").on('click',function(){
+            if($(this).prop('checked')===true){
+                $('input[type="checkbox"]').prop("checked",$(this).prop("checked"));
+                $("#example tbody tr").addClass("selected");
+            }else{
+                $("input[name='checkList']").prop("checked", false);
+                $('#example tbody tr').removeClass('selected');
+            }
+        });
+        //显示隐藏列
+        $('.toggle-vis').on('change', function (e) {
+            e.preventDefault();
+            console.log($(this).attr('data-column'));
+            var column = table.column($(this).attr('data-column'));
+            column.visible(!column.visible());
+        });
+        //删除选中行
+        $('#example tbody').on('click', 'tr input[name="checkList"]', function () {
+            var $tr = $(this).parents('tr');
+            $tr.toggleClass('selected');
+            var $tmp = $('[name=checkList]:checkbox');
+            $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+
+        });
+
+        $('#button').click(function () {
+            table.row('.selected').remove().draw(false);
+        });
+
+        $('.showcol').click(function () {
+            $('.showul').toggle();
+
+        })
+        $('.dsg-del-model').on('click',function(){
+            $('#point-del').show()
+            $('.del-close').on('click',function(){
+                $('#point-del').hide()
+            })
+        })
+    });
+</script>
+</body>
+</html>

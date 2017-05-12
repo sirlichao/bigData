@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>等待动画</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/public.css"/>
+    <style>
+        #loading{
+            height: 100%;
+            width: 100%;
+            background: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: .6;
+            z-index: 2000;
+        }
+        #loading-center{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #loading-center-absolute{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 50px;
+        }
+        .object{
+            width: 8px;
+            height: 50px;
+            margin-right: 5px;
+            background-color: #FFFFFF;
+            -webkit-animation: animate 1s infinite;
+            -o-animation:animate 1s infinite;
+            animation:animate 1s infinite;
+            float: left;
+        }
+        .object:last-child{
+            margin-right: 0px;
+        }
+        .object:nth-child(10){
+            -webkit-animation-delay: 0.9s;
+            -moz-animation-delay: 0.9s;
+            -o-animation-delay: 0.9s;
+            animation-delay: 0.9s;
+            background: #554c8e;
+        }
+        .object:nth-child(9){
+            -webkit-animation-delay: 0.9s;
+            -moz-animation-delay: 0.9s;
+            -o-animation-delay: 0.9s;
+            animation-delay: 0.9s;
+            background: #ffbc35;
+        }
+        .object:nth-child(8){
+            -webkit-animation-delay: 0.8s;
+            -moz-animation-delay: 0.8s;
+            -o-animation-delay: 0.8s;
+            animation-delay: 0.8s;
+            background: #fff;
+        }
+        .object:nth-child(7){
+            -webkit-animation-delay: 0.7s;
+            -moz-animation-delay: 0.7s;
+            -o-animation-delay: 0.7s;
+            animation-delay: 0.7s;
+            background: #34bcd9;
+        }
+        .object:nth-child(6){
+            -webkit-animation-delay: 0.6s;
+            -moz-animation-delay: 0.6s;
+            -o-animation-delay: 0.6s;
+            animation-delay: 0.6s;
+            background: #73bfa1;
+        }
+        .object:nth-child(5){
+            -webkit-animation-delay: 0.5s;
+            -moz-animation-delay: 0.5s;
+            -o-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+            background: #e4bee3;
+        }
+        .object:nth-child(4){
+            -webkit-animation-delay: 0.4s;
+            -moz-animation-delay: 0.4s;
+            -o-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+            background: #51b7c2;
+        }
+        .object:nth-child(3){
+            -webkit-animation-delay: 0.3s;
+            -moz-animation-delay: 0.3s;
+            -o-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+            background: #554c8e;
+        }
+        .object:nth-child(2){
+            -webkit-animation-delay: 0.2s;
+            -moz-animation-delay: 0.2s;
+            -o-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+            background: #ffbc35;
+        }
+        .object:nth-child(1){
+            -webkit-animation-delay: 0.1s;
+            -moz-animation-delay: 0.1s;
+            -o-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+            background: #6990ad;
+        }
+        @-webkit-keyframes animate {
+            50% {
+                -ms-transform: scaleY(0);
+                -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+
+            }
+        }
+        @keyframes animate {
+            50% {
+                -ms-transform: scaleY(0);
+                -webkit-transform: scaleY(0);
+                transform: scaleY(0);
+            }
+        }
+    </style>
+
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 引入 jQuery 文件 -->
+<script src="../js/jquery/jquery.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../js/bootstrap/bootstrap.js"></script>
+</body>
+</html>

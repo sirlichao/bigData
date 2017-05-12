@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据预测</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../css/H-ui/H-ui.css"/>
+    <link rel="stylesheet" href="../../css/clusterAnalysis.css"/>
+    <style>
+        ::-webkit-scrollbar {        width: 8px;
+            height: 8px;}
+        /* 滚动槽 */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px #fff;
+            border-radius: 5px;
+            width: auto;
+        }
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            height: 50px;
+            background-color: #D2D2D2;
+            -webkit-border-radius: 4px;
+            outline: #D2D2D2 solid 1px;
+            outline-offset: -2px;
+            border: 1px solid #D2D2D2;
+        }
+        .dsg-group{
+            margin-bottom: 10px;
+            height: 32px;
+        }
+        .dropMove{
+            list-style-type: none;
+            float: left;
+            height: 24px;
+            margin: 2px 0px;
+            cursor:pointer;
+            text-align:center;
+            line-height: 24px;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            width: 100px;
+            overflow: hidden;
+            background:#F6EEDB;
+            text-decoration: none;
+            margin-left:3px;
+            border-radius:2px;
+            padding-right:10px;
+        }
+        .dropDrag{
+            cursor:move;
+            text-align:center;
+            hieght:24px;
+            line-height: 24px;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            width: 100px;
+            overflow: hidden;
+            background:#F6EEDB;
+        }
+        /*开始预测按钮*/
+        .btnCal{
+            border: 1px solid #ddd;
+            width: 100px;
+            height:30px;
+            line-height:30px;
+            text-align: center;
+            opacity: 0.5;
+        }
+        .btnCal:hover{
+            banckground:#00AFF6;
+        }
+        /*选择的显示*/
+        .selectShow{
+            display: none;
+        }
+        /*拖动框中的删除*/
+        .remove{
+            cursor: pointer;
+            position: absolute;
+            top: 2px;
+            right: 4px;
+            color: #dbdbdb;
+        }
+        .remove:hover{
+            color:#000;
+        }
+    </style>
+</head>
+<body>
+<div class="nav navbar-default navbar-fixed-top">
+    <div>
+        <div class="lf">
+            <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据预测</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+
+                <li>
+                    <a href="#">数据挖掘&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="">
+                            <a href="clusterAnalysis.html">聚类分析</a>
+                        </li>
+                        <li><a href="dataPrediction.html">数据预测</a></li>
+                        <li><a href="associationAnalysis.html">关联分析</a></li>
+                        <li><a href="correlationAnalysis.html">相关性分析</a></li>
+                    </ul>
+                </li>
+                <li data-target="#myModal" data-toggle="modal">
+                    <a href="#">数据分析</a>
+                </li>
+                <li data-toggle="modal" data-target="#myModal">
+                    <a href="#">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#"><span id="navList" class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="#">15690053779</a></li>
+                        <li><a href="">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="dsg-mian">
+    <div class="dsg-left">
+        <div class="dsg-left-main">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href=".myData" role="tab" data-toggle="tab">我的数据</a></li>
+            </ul>
+            <div class="tab-content heightAll" data-spy="scroll">
+                <div role="tabpanel" class="tab-pane active myData">
+                    <div class="dsg-group-header">
+                        <div class="dsg-search">
+                            <form action="">
+                                <input type="text" class="search-txt" name="txt" id="search" placeholder="输入你搜索的内容"/>
+                                <span class="glyphicon glyphicon-search search"></span>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="dsg-group-scroll">
+                        <ul class="dsg-group-theme panel-group" id="accordion">
+                            <li></li>
+                            <li>
+                                <div class="addData">
+                                        <span>
+                                            你当前没有数据
+                                            <br/>
+                                            请点击添加
+                                        </span>
+                                </div>
+                            </li>
+                            <li class="list-drag">
+                                <div type="button" class="dragName"data-parent="#accordion" data-toggle="collapse" data-target="#demo" aria-expanded="true" aria-controls="demo">
+                                    <div class="dsg-myData">超市零售</div>
+                                </div>
+                                <form action="" class="drag-rename">
+                                    <input type="text" style="width:150px;height: 25px;line-height: 25px;padding-right: 16px" name="text" class="text"/>
+                                    <img src="../../images/yzwc.png" class="sure" style="width: 14px;" alt=""/>
+                                </form>
+                                <div class="btn-group dataName">
+                                    <span class="caret data-down" style="color: #fff;"></span>
+                                </div>
+                                <ul class="collapse in coll" id="demo">
+                                    <li>
+                                        <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">维度</span>
+                                        <div class="btn-group">
+                                            <span class="caret dimension-down"></span>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">订单日期</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">量度</span>
+                                        <div class="btn-group">
+                                            <span class="caret measure-down"></span>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content" >销售额</a>
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret measure-downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">数量</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret measure-downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="publicData">...</div>
+                <div role="tabpanel" class="tab-pane" id="exampleData">.. ds .</div>
+            </div>
+        </div>
+    </div>
+    <div class="dsg-center row rt" style="margin-right:5px;width: calc(100% - (245px))!important;height: 548px;background: #F9F9F9;">
+        <div  style="overflow-y: auto;height: 100%">
+            <div  class="condition" style="background: #fff;border-bottom: 1px solid #ddd;padding-bottom: 40px">
+                <div class="dsg-group" style="margin: 0px">
+                    <div class="col-md-6">时间维度(为了让预测更准及可理解,只能使用一个时间维度)</div>
+                    <div class="col-md-6">度量(至少需要两个度量才可以进行预测)</div>
+                </div>
+                <div class="dsg-group">
+                    <div class="col-md-6" >
+                        <div id="timeD" style="position: relative;border: 1px dotted #ddd;height: 30px;line-height: 30px">
+                            <span id="remove1" class="glyphicon glyphicon-trash remove" style=""></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="timeM" style="position: relative;border: 1px dotted #ddd;height: 30px;line-height: 30px">
+                            <span id="remove2" class="glyphicon glyphicon-trash remove" style=""></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dsg-group">
+                    <div class="col-md-8" style="color: #00aff6;cursor: pointer;">高级显示</div>
+                    <div class="col-md-4">
+                        <button disabled class="btnCal">开始预测</button>
+                        <img id="waiteImg" src="http://static.oschina.net/uploads/space/2014/0430/115223_oFLD_1163935_thumb.gif" style="width: 25px;display: none"/>
+                    </div>
+                </div>
+                    <div class="dsg-group selectShow">
+                        <div class="col-md-4">
+                            <p>因变量(想要预测的值)&nbsp;<span class="text-danger">*</span>
+                                <select id="select" style="margin-left: 20px;height: 30px;width: 100px">
+                                    <option value="0">==请选择==</option>
+                                    <option value="1">销售额</option>
+                                    <option value="2">数量</option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="dsg-group selectShow">
+                        <div class="col-md-10">
+                            自变量(影响预测值的因数,请输入因数的预估值):
+                        </div>
+                    </div>
+                    <div class="dsg-group selectShow">
+                        <div class="col-md-4 sales">
+                            销售额&nbsp;&nbsp;<span class="text-danger">*</span>
+                            <input type="text" placeholder="请输入数值" style="padding-left:5px;width: 100px;height: 30px;"/>
+                        </div>
+                        <div class="col-md-6 nums">
+                            数量&nbsp;&nbsp;<span class="text-danger">*</span>
+                            <input type="text" placeholder="请输入数值" style="padding-left:5px;width: 100px;height: 30px;"/>
+                        </div>
+                    </div>
+                    <div class="dope-result" style="display: none;">
+                        <div class="col-md-6">
+                            <h4>
+                                预测值：<span class="text-success">2107.0309287540017</span>
+                            </h4>
+                            <p>
+                                <label>整体预测置信度：</label>无法基于现有数据进行准确推测，请修改因变量或提供更多／更准确的数据重新进行预测。
+                                历史数据量很少，
+                                基于少量数据量得出的预测，可能与实际准确值差距很大
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>
+                                自变量贡献度：
+                            </h4>
+                            <p>
+                                <label>数量：</label>无贡献度,需要从预测中去除改度量
+                            </p>
+                        </div>
+                        <div id="container" style="width: calc(100% - (275px))!important;height:400px"></div>
+                    </div>
+
+                <div style="clear: both">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="action-list">
+
+    </div>
+
+
+
+</div>
+
+<!-- 引入 jQuery 文件 -->
+<script src="../../js/jquery/jquery.js"></script>
+<script type="application/javascript" src="../../js/jquery/jquery-ui.js"></script>
+<script src="../../js/angular/angular.js"></script>
+<script src="../../js/highcharts/highcharts.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../../js/bootstrap/bootstrap.js"></script>
+
+<script>
+    $( ".drag-content" ).draggable({
+        cursor: "move",
+        revert: "invalid",
+
+        helper: function(obj){
+            //$('.row-content').css('border','1px dashed blue')
+            var txt=obj.target.firstChild.data;
+            return "<div class='move' style='opacity: 0;'>"+txt+"</div>";
+        },
+        start:function(event,ui){
+            $(this).parents('.list-drag').siblings()
+                    .children('.drag-content').draggable({'disabled':true});
+            //$('.heightAll').css('overflow','visible');
+            $(ui.helper).css({'text-overflow':'inherit','width':'outo'})
+            $(this).parents('.list-drag').siblings().find("li .drag-content").draggable({'disabled':true});
+            var x = event.pageX;
+            var y = event.pageY;
+            console.log(x,y);
+            //var txt=ui.target.firstChild.data;
+            console.log($(this).html());
+            var btn_=$('<div class="move"></div>');
+            btn_.html($(this).html());
+            btn_.css({'position':'absolute',"top":(y-15)+'px','left':(x-75)+'px'});
+            //$('.move').remove();
+            $('body').append(btn_);
+        },
+        drag:function(e,ui){
+            //console.log(ui.helper);
+            e.stopPropagation();
+            var x = event.pageX;
+            var y = event.pageY;
+            $('.move').css({'position':'absolute',"top":(y-15)+'px','left':(x-75)+'px'});
+            //console.log(x,y);
+        },
+        stop:function(event,ui){
+            $('.move').remove();
+            var timedL=$("#timeD .ui-draggable-handle").length;
+            var timemL=$("#timeM .ui-draggable-handle").length;
+            if(timedL>0&&timemL>1){
+                $('.btnCal').removeAttr('disabled').css({"border":"1px solid #00AFF6","background":"#fff","color":"#00AFF6","opacity":"1"})
+                        .hover(function(){
+                            $(this).css({"background":"#00AFF6","color":"#fff"});
+                        }).mouseout(function(){
+                            $(this).css({"border":"1px solid #00AFF6","background":"#fff","color":"#00AFF6","opacity":"1"});
+                        });
+                $('.selectShow').show();
+            }else{
+                $('.btnCal').attr('disabled',true).css({"border":"1px solid #ddd","background":"#ddd","color":"#000","opacity":"0.5"});
+                $('.selectShow').hide();
+            }
+        }
+
+    });
+
+    $( "#timeD" ).droppable({
+        activeClass: "active",
+        hoverClass: "hover",
+        drop: function( event, ui ) {
+            var helper=ui.helper;
+            console.log(helper);
+            var cc=helper[0];
+            var cc1=$(cc).clone().removeAttr("class").removeAttr("style")
+                    .addClass('dropMove');
+            $(cc1).appendTo("#timeD");
+            $(cc1).draggable({
+                cursor: "move",
+                start: function (event,ui){
+                    $(this).css({"z-index":"1000","opacity":0});
+                    var x = event.pageX;
+                    var y = event.pageY;
+                    console.log(x,y);
+                    console.log($(this).html());
+                    var btn_=$('<div class="dropDrag"></div>');
+                    btn_.html($(this).html());
+                    btn_.css({'position':'absolute',"top":(y-15)+'px','left':(x-75)+'px'});
+                    $('body').append(btn_);
+                },
+                drag:function(e,ui){
+                    //console.log(ui.helper);
+                    e.stopPropagation();
+                    $(this).css({"position":"absolute","z-index":100000})
+                    var x = e.pageX;
+                    var y = e.pageY;
+                    $('.dropDrag').css({'position':'absolute',"top":(y-13)+'px','left':(x-50)+'px'});
+                    //console.log(x,y);
+                },
+                stop: function( event, ui ) {
+                    $(ui.helper[0]).remove();
+                    $('.dropDrag').remove();
+                    //写元素脱出行时显示
+                    var timedL=$("#timeD .ui-draggable-handle").length;
+                    var timemL=$("#timeM .ui-draggable-handle").length;
+                    if(timedL>0&&timemL>1){
+                        $('.btnCal').removeAttr('disabled').css({"border":"1px solid blue"});
+                        $('.selectShow').show();
+                    }else{
+                        $('.btnCal').attr('disabled',true).css({"border":"1px solid #ddd","background":"#ddd","color":"#000","opacity":"0.5"});
+                        $('.selectShow').hide();
+                    }
+                    if(timedL==0&&timemL==0){
+                        $('.sales').val('请输入数值');
+                        $('.nums').val('请输入数值');
+                        $('.dope-result').hide(100);
+                    }
+                }
+            });
+        },
+        activate:function(event, ui ){
+            console.info("activate");
+            $('#timeD').css('border','1px dotted #00CCFF')
+
+        },
+        create:function(event, ui){
+            //console.info("create");
+        },
+        deactivate:function(event, ui){
+            $('#timeD').css('border','1px dashed #ddd')
+            //console.info("-------------------------------");
+            //$('.heightAll').css('overflow','auto');
+            var rowL=$('#timeD .ui-draggable-handle').length;
+            if(rowL>1&&rowL==2){
+                $('#btnCluster').removeAttr('disabled').css({'background':'#0099FF','color':'#fff'})
+            }
+        },
+        out:function(event, ui){
+            var rowL=$('#timeD .ui-draggable-handle').length;
+            if(rowL==0){
+                $('.info').show();
+            }
+            //console.info("777777777777777777777777777777777");
+
+        },
+        over:function(event,ui){
+            $('.info').hide();
+            console.log("over")
+        },
+        tolerance: "touch"
+    });
+    $( "#timeM" ).droppable({
+        activeClass: "active",
+        hoverClass: "hover",
+        drop: function( event, ui ) {
+            var helper=ui.helper;
+            var cc=helper[0];
+            var cc1=$(cc).clone().removeAttr("class").removeAttr("style").addClass('dropMove');
+            $(cc1).appendTo("#timeM");
+            $(cc1).draggable({
+                cursor: "move",
+                start: function (event, ui) {
+                    $(this.target).css({"z-index":"1000","opacity":0});
+                    var x = event.pageX;
+                    var y = event.pageY;
+                    console.log(x,y);
+                    $(ui.helper[0]).css({'opacity':'0'});
+                    var btn_=$('<div class="dropDrag"></div>');
+                    btn_.html($(this).html());
+                    btn_.css({'position':'absolute',"top":(y-15)+'px','left':(x-75)+'px'});
+                    //$('.move').remove();
+                    $('body').append(btn_);
+                },
+                drag:function(e,ui){
+                    e.stopPropagation();
+                    $(this).css({"position":"absolute","z-index":100000})
+                    var x = e.pageX;
+                    var y = e.pageY;
+                    $('.dropDrag').css({'position':'absolute',"top":(y-13)+'px','left':(x-50)+'px'});
+                    //console.log(x,y);
+                },
+                stop: function( event, ui ) {
+                    //写元素脱出行时显示
+                    $(ui.helper[0]).remove();
+                    $('.dropDrag').remove();
+                    var timedL=$("#timeD .ui-draggable-handle").length;
+                    var timemL=$("#timeM .ui-draggable-handle").length;
+                    if(timedL>0&&timemL>1){
+                        $('.btnCal').removeAttr('disabled').css({"border":"1px solid blue"});
+                        $('.selectShow').show();
+                    }else{
+                        $('.btnCal').attr('disabled',true).css({"border":"1px solid #ddd","background":"#ddd","color":"#000","opacity":"0.5"});
+                        $('.selectShow').hide();
+                    }
+//				 	alert("======================");
+                }
+            });
+
+
+            //console.log("stop");
+        },
+        activate:function(event, ui ){
+            //console.info("activate");
+            $('#timeM').css('border','1px dotted #00CCFF')
+
+        },
+        create:function(event, ui){
+            //console.info("===========================");
+        },
+        deactivate:function(event, ui){
+            //console.info("-------------------------------");
+            $('#timeM').css('border','1px dashed #ddd');
+        },
+        out:function(event, ui){
+//                    console.log(r.length);
+
+        },
+        over:function(event,ui){
+            //console.log("over")
+            var listL=$('.list-view .ui-draggable-handle').length;
+            if(listL<1){
+                $('#timeM').css({"height":"30px"});
+            }else if(listL>3){
+                $('#timeM').css({"height":"auto","z-index":1000});
+            }
+        },
+        tolerance: "touch"
+    });
+
+    $(function () {
+        $('#container').highcharts({
+            title: {
+                text: '',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: ['2014-12-23', '2014-12-24', '2014-12-25', '2014-12-26', '2014-12-27', '2014-12-28',
+                    '2014-12-29', '2014-12-30',"预测"
+                ],
+                labels: {
+                    step: 2
+                }
+
+            },
+            credits: {
+                enabled: false
+            },
+            /*数据点设置*/
+            plotOptions: {
+                series: {
+                    marker: {
+                        enabled: false, /*数据点是否显示*/
+                        radius: 5,  /*数据点大小px*/
+                        //fillColor:'#ff3300'         /*数据点颜色*/
+                    },
+                    lineWidth: 5,
+                },
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            yAxis: {
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080',
+                }]
+            },
+            legend: {
+                enabled: false
+            },
+//            tooltip: {
+//                valueSuffix: '°C'
+////            },
+//            legend: {
+//                layout: 'vertical',
+//                align: 'right',
+//                verticalAlign: 'middle',
+//                borderWidth: 0
+//            },
+            series: [
+                {
+                name: '超哥',
+                data: [30000, 14000, 36000, 4000, 15000, 6000, 30000, 28000,2107.0309287540017]
+            }]
+        });
+    });
+
+    $(function(){
+        $('#select').on('click',function(){
+            console.log($("option:selected").val())
+            if($("option:selected").val()=="1"){
+                $(".sales").show();
+                $(".nums").hide();
+            }else if($("option:selected").val()=="0"){
+                $(".nums").show();
+                $(".sales").show();
+            }
+            else if($("option:selected").val()=="2"){
+                $(".sales").hide();
+                $(".nums").show();
+            }
+        });
+        $('.btnCal').on('click',function(){
+                $('#waiteImg').show();
+                setTimeout(function(){
+                    $('.dope-result').show(1000);
+                    $("#waiteImg").hide();
+                },5000)
+
+        })
+    })
+
+
+    //删除拖动框中的元素
+    $('#remove1').on('click',function(){
+        $('#timeD .ui-draggable-handle').remove();
+        var timedL=$("#timeD .ui-draggable-handle").length;
+        var timemL=$("#timeM .ui-draggable-handle").length;
+        if(timedL>0&&timemL>1){
+            $('.btnCal').removeAttr('disabled').css({"border":"1px solid blue"});
+            $('.selectShow').show();
+        }else{
+            $('.btnCal').attr('disabled',true).css({"border":"1px solid #ddd","background":"#ddd","color":"#000","opacity":"0.5"});
+            $('.selectShow').hide();
+        }
+        if(timedL==0&&timemL==0){
+            $('.sales').val();
+            $('.nums').val();
+            $("option:selected").val(0);
+            $('.dope-result').hide(100);
+        }
+    });
+    $('#remove2').on('click',function(){
+        $('#timeM .ui-draggable-handle').remove();
+        var timedL=$("#timeD .ui-draggable-handle").length;
+        var timemL=$("#timeM .ui-draggable-handle").length;
+        if(timedL>0&&timemL>1){
+            $('.btnCal').removeAttr('disabled').css({"border":"1px solid blue"});
+            $('.selectShow').show();
+        }else{
+            $('.btnCal').attr('disabled',true).css({"border":"1px solid #ddd","background":"#ddd","color":"#000","opacity":"0.5"});
+            $('.selectShow').hide();
+        }
+        if(timedL==0&&timemL==0){
+            console.log('正确不啊')
+            console.log($('.sales').val(), $('.nums').val());
+
+            $('.dope-result').hide(100);
+        }
+    })
+</script>
+</body>
+</html>

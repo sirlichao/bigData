@@ -1,0 +1,10 @@
+{
+  "data": {
+    "all": 5,
+    "li": 1,
+    "datasource" : 2,
+    "dashboard" : 1,
+    "chart" : 1
+  },
+  "code" :200
+}

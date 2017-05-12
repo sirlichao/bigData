@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>聚类分析</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../css/H-ui/H-ui.css"/>
+    <link rel="stylesheet" href="../../css/clusterAnalysis.css"/>
+    <script src="../../js/angular/angular.js"></script>
+    <style>
+        ::-webkit-scrollbar {        width: 8px;
+            height: 8px;}
+        /* 滚动槽 */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px #fff;
+            border-radius: 5px;
+            width: auto;
+        }
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            height: 50px;
+            background-color: #D2D2D2;
+            -webkit-border-radius: 4px;
+            outline: #D2D2D2 solid 1px;
+            outline-offset: -2px;
+            border: 1px solid #D2D2D2;
+        }
+        .crilce_1 {
+            width: 300px;
+            height: 300px;
+            line-height: 300px;
+            background: #FF6600;
+            border-radius: 50%;
+            margin-left:200px;
+            margin-top: 20px;
+        }
+        .crilce_2 {
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            background: #f37b1d;
+            border-radius: 50%;
+            margin-left: 488px;
+            margin-top: -162px;
+        }
+        .crilce_3 {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            background: #00CC99;
+            border-radius: 50%;
+            margin-left: 384px;
+            margin-top: -40px;
+        }
+        .crilce_4 {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background: #008200;
+            border-radius: 50%;
+            margin-left: 332px;
+            margin-top: -90px;
+        }
+        .crilce_5 {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            background: #f37b1d;
+            border-radius: 50%;
+            margin-top: -33px;
+            margin-left: 257px;
+        }
+        .tableHide{
+            position: absolute;
+            top: 3px;
+            right: 0px;
+            font-size: 26px;
+            cursor: pointer;
+            height: 26px;
+            line-height: 26px;
+            width: 26px;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #7b7b7b;
+            border-radius: 50%;
+
+        }
+        .div{
+            padding-top: 36px;
+            background:#fff;
+            width:600px;
+            max-height: 200px ;
+            overflow:hidden;
+            position: absolute;
+            z-index: 99999;
+            top: 0px;
+            left: 0px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+        }
+        #remove{
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+            right: 4px;
+            color: #dbdbdb;
+        }
+        #remove:hover{
+            color:#000;
+        }
+    </style>
+</head>
+<body ng-app="dsgLichao" ng-controller="lichao">
+<div class="nav navbar-default navbar-fixed-top">
+    <div>
+        <div class="lf">
+            <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;聚类分析</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+
+                <li>
+                    <a href="#">数据挖掘&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="">
+                            <a href="clusterAnalysis.html">聚类分析</a>
+                        </li>
+                        <li><a href="dataPrediction.html">数据预测</a></li>
+                        <li><a href="associationAnalysis.html">关联分析</a></li>
+                        <li><a href="correlationAnalysis.html">相关性分析</a></li>
+                    </ul>
+                </li>
+                <li data-target="#myModal" data-toggle="modal">
+                    <a href="#">数据分析</a>
+                </li>
+                <li data-toggle="modal" data-target="#myModal">
+                    <a href="#">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#"><span id="navList" class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="#">15690053779</a></li>
+                        <li><a href="">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="dsg-mian">
+    <div class="dsg-left">
+        <div class="dsg-left-main">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href=".myData" role="tab" data-toggle="tab">我的数据</a></li>
+            </ul>
+            <div class="tab-content heightAll" data-spy="scroll">
+                <div role="tabpanel" class="tab-pane active myData">
+                    <div class="dsg-group-header">
+                        <div class="dsg-search">
+                            <form action="">
+                                <input type="text" class="search-txt" name="txt" id="search" placeholder="输入你搜索的内容"/>
+                                <span class="glyphicon glyphicon-search search"></span>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="dsg-group-scroll">
+                        <ul class="dsg-group-theme panel-group" id="accordion">
+                            <li></li>
+                            <li>
+                                <div class="addData">
+                                        <span>
+                                            你当前没有数据
+                                            <br/>
+                                            请点击添加
+                                        </span>
+                                </div>
+                            </li>
+                            <li class="list-drag">
+                                <div type="button" class="dragName"data-parent="#accordion" data-toggle="collapse" data-target="#demo" aria-expanded="true" aria-controls="demo">
+                                    <div class="dsg-myData">超市零售</div>
+                                </div>
+                                <form action="" class="drag-rename">
+                                    <input type="text" style="width:150px;height: 25px;line-height: 25px;padding-right: 16px" name="text" class="text"/>
+                                    <img src="../../images/yzwc.png" class="sure" style="width: 14px;" alt=""/>
+                                </form>
+                                <div class="btn-group dataName">
+                                    <span class="caret data-down" style="color: #fff;"></span>
+                                </div>
+                                <ul class="collapse in coll" id="demo">
+                                    <li>
+                                        <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">维度</span>
+                                        <div class="btn-group">
+                                            <span class="caret dimension-down"></span>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content">订单日期</a>
+
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">量度</span>
+                                        <div class="btn-group">
+                                            <span class="caret measure-down"></span>
+                                        </div>
+                                        <ul>
+                                            <li class="group-second-body">
+                                                <span class="icon glyphicon glyphicon-time"></span>
+                                                <div class="group-item">
+                                                    <a href="#" class="drag-content" >销售额</a>
+                                                    <div class="btn-group btnG">
+                                                        <span class="caret measure-downList"></span>
+                                                    </div>
+                                                </div>
+                                                <form action="" class="group-item-form">
+                                                    <input type="text" class="group-item-txt" />
+                                                    <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="publicData">...</div>
+                <div role="tabpanel" class="tab-pane" id="exampleData">.. ds .</div>
+            </div>
+        </div>
+    </div>
+    <div class="dsg-center row rt" style="margin-right:5px;width: calc(100% - (245px))!important;height: 548px;background: #fff;border-radius: 10px">
+        <div style="border-bottom:1px solid #ddd;position: relative;padding-bottom: 30px">
+            <p style="margin: 5px 0px 0px 5px">包含列：</p>
+            <div id="rowList" style="position: relative; width:  calc(100% - (100px));height: 30px;line-height:30px;margin-left: 50px;border: 1px dotted #ddd;">
+                <p class="info" style="color: #ddd;">请至少拖入一个维度和度量</p>
+                <span id="remove" class="glyphicon glyphicon-trash" style=""></span>
+            </div>
+            <p id="waite" style="display:none;font-family: '微软雅黑';margin: 5px 0px 5px 50px;">数据量有点大请耐心等待....</p>
+            <div style="margin: 10px">
+                <select style="width: 100px;height: 30px;margin-left: 800px;">
+                    <option value="0">K-means</option>
+                    <option value="1">Clara</option>
+                    <option value="2">Fuzzy</option>
+                </select>
+                <button id="btnCluster" disabled style="border: 1px solid #dbdbdb; height: 30px;width: 60px;margin-left: 20px;margin-top:-3px;background: #ddd;opacity: 0.5">聚类</button>
+                <img id="waiteImg" src="http://static.oschina.net/uploads/space/2014/0430/115223_oFLD_1163935_thumb.gif" style="width: 25px;display: none"/>
+            </div>
+        </div>
+        <div style="position: relative; width: 100%;height: 407px;overflow: auto">
+            <div  class="dsgClster" style="display: none">
+                <div >
+                    <div class="crilce_1 text-center" title="24:24" ng-click="show(1)">24</div>
+                    <div class="crilce_2 text-center" title="16:16" ng-click="show(2)">16</div>
+                    <div class="crilce_3 text-center" title="10:10" ng-click="show(3)">10</div>
+                    <div class="crilce_4 text-center" title="8:8" ng-click="show(4)">8</div>
+                    <div class="crilce_5 text-center" title="4:4" ng-click="show(5)">4</div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="action-list"></div>
+
+</div>
+<div class="div" ng-show="isShow" style="">
+    <div class="tableHide">×</div>
+    <div style="height: 150px;overflow: auto;">
+        <table class="table table-responsive table-striped table-bordered table-hover" >
+            <thead>
+            <th class="text-center">订单日期</th>
+            <th class="text-center">销售额</th>
+            </thead>
+            <tbody class="">
+            <tr class="" ng-repeat="dataRow in dataRows">
+                <td style="text-align: center" class="">{{dataRow.tdata}}</td>
+                <td style="text-align: center" class="">{{dataRow.tdata2}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<!-- 引入 jQuery 文件 -->
+<script src="../../js/jquery/jquery.js"></script>
+<script type="application/javascript" src="../../js/jquery/jquery-ui.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../../js/bootstrap/bootstrap.js"></script>
+
+<script>
+    $( ".drag-content" ).draggable({
+        cursor: "move",
+        revert: "invalid",
+
+        helper: function(obj){
+            $('.row-content').css('border','1px dashed blue')
+            var txt=obj.target.firstChild.data;
+            return "<div class='move' style='opacity: 0;'>"+txt+"</div>";
+        },
+        start:function(event,ui){
+            $(this).parents('.list-drag').siblings()
+                    .children('.drag-content').draggable({'disabled':true});
+            //$('.heightAll').css('overflow','visible');
+            $(ui.helper).css({'text-overflow':'inherit','width':'outo'})
+            $(this).parents('.list-drag').siblings().find("li .drag-content").draggable({'disabled':true});
+            var x = event.pageX;
+            var y = event.pageY;
+            console.log(x,y);
+            //var txt=ui.target.firstChild.data;
+            console.log($(this).html());
+            var btn_=$('<div class="move"></div>');
+            btn_.html($(this).html());
+            btn_.css({'position':'absolute',"top":(y-15)+'px','left':(x-75)+'px'});
+            //$('.move').remove();
+            $('body').append(btn_);
+        },
+        drag:function(e,ui){
+            //console.log(ui.helper);
+            e.stopPropagation();
+            var x = event.pageX;
+            var y = event.pageY;
+            $('.move').css({'position':'absolute',"top":(y-15)+'px','left':(x-75)+'px'});
+            //console.log(x,y);
+        },
+        stop:function(event,ui){
+            $('.move').remove();
+        }
+
+    });
+
+    $( "#rowList" ).droppable({
+        activeClass: "active",
+        hoverClass: "hover",
+        drop: function( event, ui ) {
+            var helper=ui.helper;
+            console.log(helper);
+            var cc=helper[0];
+            var cc1=$(cc).clone().removeAttr("class").removeAttr("style")
+                    .addClass('dropMove');
+            $(cc1).appendTo("#rowList");
+            $(cc1).draggable({
+                cursor: "move",
+                start: function (event,ui){
+                    $(this).css({"z-index":"1000","opacity":0});
+                    var x = event.pageX;
+                    var y = event.pageY;
+                    console.log(x,y);
+                    console.log($(this).html());
+                    var btn_=$('<div class="dropDrag"></div>');
+                    btn_.html($(this).html());
+                    btn_.css({'position':'absolute',"top":(y-15)+'px','left':(x-75)+'px'});
+                    //$('.move').remove();
+                    $('body').append(btn_);
+                },
+                drag:function(e,ui){
+                    //console.log(ui.helper);
+                    e.stopPropagation();
+                    $(this).css({"position":"absolute","z-index":100000})
+                    var x = e.pageX;
+                    var y = e.pageY;
+                    $('.dropDrag').css({'position':'absolute',"top":(y-13)+'px','left':(x-50)+'px'});
+                    //console.log(x,y);
+                    $('.list-view').css({"height":"30px"});
+                },
+                stop: function( event, ui ) {
+                    $(ui.helper[0]).remove();
+                    $('.dropDrag').remove();
+                    //写元素脱出行时显示
+                    //console.log("hehehhehehe")
+                    var rowL=$('#rowList .ui-draggable-handle').length;
+                    if(rowL==0){
+                        $('.info').show();
+                        $('.dsgClster').hide();
+                        $('.div').hide();
+                    }
+                    if(rowL<2){
+                        $('#btnCluster').attr('disabled',true).css({'background': '#ddd','color':'#000'})
+                    }
+                }
+            });
+            //$('.heightAll').css('overflow','auto');
+            //console.log("stop");
+        },
+        activate:function(event, ui ){
+            console.info("activate");
+            $('#rowList').css('border','1px dotted #00CCFF')
+
+        },
+        create:function(event, ui){
+            //console.info("create");
+        },
+        deactivate:function(event, ui){
+            $('#rowList').css('border','1px dashed #ddd')
+            //console.info("-------------------------------");
+            //$('.heightAll').css('overflow','auto');
+            var rowL=$('#rowList .ui-draggable-handle').length;
+            if(rowL>1&&rowL==2){
+                $('#btnCluster').removeAttr('disabled').css({'background':'#0099FF','color':'#fff'})
+            }
+        },
+        out:function(event, ui){
+            var rowL=$('#rowList .ui-draggable-handle').length;
+            if(rowL==0){
+                $('.info').show();
+            }
+
+            //showChart();
+            //console.info("777777777777777777777777777777777");
+
+        },
+        over:function(event,ui){
+            $('.info').hide();
+            console.log("over")
+            var rowL=$('#rowList .ui-draggable-handle').length;
+            console.log(rowL)
+            if(rowL>1&&rowL==2){
+                $('#btnCluster').css({'background':'#0099FF'})
+            }
+            if(rowL<1){
+                $('#rowList').css({"height":"30px"});
+            }else if(rowL>8){
+                $('#rowList').css({"height":"auto","z-index":1000});
+            }
+        },
+        tolerance: "touch"
+    });
+    var myApp = angular.module('dsgLichao',[]);
+    myApp.controller('lichao',['$scope','$http',function($scope, $http){
+        $scope.isShow = false;
+        $scope.show = function(flag) {
+            $scope.dataRows=[];
+            $http.get('../../json/test.json')
+                    .success(function(data) {
+                        if(data.code == 200) {
+                            $scope.isShow = true;
+                            if(flag==1) {
+                                $scope.dataRows = (data.data);
+                            }else if(flag ==2) {
+                                $scope.dataRows = (data.data2);
+                            }else if(flag ==3) {
+                                $scope.dataRows = (data.data3);
+                            }else if(flag ==4) {
+                                $scope.dataRows = (data.data4);
+                            }else if(flag ==5) {
+                                $scope.dataRows = (data.data5);
+                            }
+
+                        }
+                    })
+        }
+    }]);
+    $('div.text-center').on('click',function(e){
+        var x= e.clientX;
+        var y = e.clientY;
+        console.log(x,y);
+        $('.div').show();
+        $('.div').css({'position':'absolute',"top":(y-150)+'px','left':(x-300)+'px'});
+    });
+    $('#btnCluster').on('click',function(){
+        $('#waiteImg').show();
+        $('#waite').show();
+        setTimeout(function(){
+            $('.dsgClster').show();
+            $('#waiteImg').hide();
+            $('#waite').hide();
+        },3000)
+
+    })
+    $('.tableHide').on('click',function(){
+        $('.div').hide();
+    })
+    $('#remove').on('click',function(){
+        //console.log('shanchule am ?')
+        $('#rowList .ui-draggable-handle').remove();
+        $('.info').show();
+        var rowL=$('#rowList .ui-draggable-handle').length;
+        if(rowL==0){
+            $('.info').show();
+            $('.dsgClster').hide();
+            $('.div').hide();
+        }
+        if(rowL<2){
+            $('#btnCluster').attr('disabled',true).css({'background': '#ddd','color':'#000'})
+        }
+    })
+</script>
+</body>
+</html>

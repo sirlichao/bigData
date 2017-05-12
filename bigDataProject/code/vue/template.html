@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>vue组件</title>
+    <script src="../../js/vue-2.0.1/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <app-nav v-bind:toto="message"></app-nav>
+            <app-sidebar v-for="key in content" v-bind:todo="key"></app-sidebar>
+            <app-content></app-content>
+    </div>
+    <div id="app1" v-bind:class="classObject"></div>
+    <div id="app2">
+        <template v-if="isShow">
+            <label>userName:</label>
+            <input type="text" placeholder="输入你的姓名"/>
+        </template>
+        <template v-else>
+            <label>emailName:</label>
+            <input type="email" placeholder="请输入你的电子邮箱"/>
+        </template>
+        <button @click="togget()">togget</button>
+    </div>
+    <ul class="ul">
+        <template v-for="(item,key,index) in object">
+            <li>{{ item }}+{{key}}+{{index}}</li>
+        </template>
+    </ul>
+    <div id="example">
+        <input
+                v-model="newTodoText"
+                v-on:keyup.enter="addNewTodo"
+                placeholder="Add a todo"
+                >
+        <ul>
+            <li
+                    is="todo-item"
+                    v-for="(todo, index) in todos"
+                    v-bind:title="todo"
+                    v-on:remove="todos.splice(index, 1)"
+                    ></li>
+        </ul>
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+        <select name=""v-model="selected">
+            <option >a</option>
+            <option >b</option>
+            <option >c</option>
+        </select>
+        <span>selected{{selected}}</span>
+    </div>
+    <ul class="ul2">
+        <li v-for="n in numberFilter">{{n}}</li>
+    </ul>
+    <div id="even">
+        <p>talol:{{tatol}}</p>
+        <my-component v-on:inctement="incrementTotal"></my-component>
+        <my-component v-on:inctement="incrementTotal"></my-component>
+    </div>
+    <div id="app4">
+        <currency-input
+                label="Price"
+                v-model="price"
+                ></currency-input>
+        <currency-input
+                label="Shipping"
+                v-model="shipping"
+                ></currency-input>
+        <currency-input
+                label="Handling"
+                v-model="handling"
+                ></currency-input>
+        <currency-input
+                label="Discount"
+                v-model="discount"
+                ></currency-input>
+
+        <p>Total: ${{ total }}</p>
+    </div>
+    <script>
+        Vue.component('app-nav',{
+            props:['toto'],
+            template:"<div class='div1'>{{toto}}<div>"
+        });
+        Vue.component("app-sidebar",{
+            props:['todo'],
+            template:"<p>{{todo.text}}</p>"
+        });
+        Vue.component("app-content",{
+            template:"<div class='div3'></div>"
+        })
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello template",
+                content:[
+                    {text:"hello vue"},
+                    {text:"hello body"},
+                    {text:"hello girl"}
+                ]
+            }
+        })
+        new Vue({
+            el:"#app1",
+            data:{
+                isActive:true,
+                error:null
+            },
+            computed:{
+                classObject:function(){
+                    return {
+                        active:this.isActive&&!this.error,
+                        'text-danger':this.error&&this.error.type === "fatal"
+                    }
+                }
+            }
+        })
+        new Vue({
+            el:"#app2",
+            data:{
+                isShow:true
+            },
+            methods:{
+                togget:function(){
+                    this.isShow = !this.isShow
+                }
+            }
+        });
+        new Vue({
+            el:".ul",
+            data:{
+                object: {
+                    FirstName: 'John',
+                    LastName: 'Doe',
+                    Age: 30
+                }
+            }
+        });
+        Vue.component('todo-item',{
+            template:"<li>{{ title }}<button v-on:click='$emit(\"remove\")'>X</button></li>",
+            props:['title']
+        });
+        new Vue({
+            el:"#example",
+            data:{
+                selected:null,
+                checked:'',
+                newTodoText: '',
+                todos: [
+                    'Do the dishes',
+                    'Take out the trash',
+                    'Mow the lawn'
+                ]
+            },
+            methods:{
+                addNewTodo:function(){
+                    this.todos.push(this.newTodoText);
+                    this.newTodoText = "";
+                }
+            }
+        })
+        new Vue({
+            el:".ul2",
+            data:{
+                number:[1,2,4,5,56,8]
+            },
+            computed:{
+                numberFilter:function(){
+                    return this.number.filter(function(num){
+                        return num%2 === 0;
+                    })
+                }
+            }
+        });
+        Vue.component('my-component',{
+            template:"<button v-on:click='inctement'>{{contur}}</button>",
+            data:function(){
+                return {contur:0};
+            },
+            methods:{
+                inctement:function(){
+                    this.contur +=1;
+                    this.$emit("inctement");
+                }
+            }
+        })
+        new Vue({
+            el:"#even",
+            data:{
+                tatol:0
+            },
+            methods:{
+                incrementTotal:function(){
+                    this.tatol+=1;
+                }
+            }
+        });
+        Vue.component('currency-input',{
+            template:'<label>price:$</label><input v-bind:value=""/>'
+        })
+    </script>
+</body>
+</html>

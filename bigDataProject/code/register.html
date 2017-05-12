@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>修改密码</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+<nav class="nav">
+    <a href="#"><img width="90" src="../images/dsg-logo.png" /></a>
+    <ul>
+        <li><a href="#">首页</a></li>
+        <li id="product">
+            <a href="#">产品中心</a>
+            <ul>
+                <li><a href="">免费云分析平台</a></li>
+                <li><a href="">标准企业版</a></li>
+                <li><a href="">高级企业版</a></li>
+            </ul>
+        </li>
+        <li><a href="#">国云数据市场</a></li>
+        <li><a href="#">国云数据学院</a></li>
+        <li><a href="#">分析师社区</a></li>
+    </ul>
+</nav>
+<section>
+
+    <div class="section">
+        <form action="">
+        <img src="../images/bj.png" style="width: 100%;height: 600px"/>
+        <div id="login">
+            <div class="add">
+                <!--<img src="../images/dsg-logo.png" />-->
+                添加用户
+            </div>
+            <span class="lf"></span>
+            <input type="text" maxlength="11" placeholder="请输入用户名" name="username" autocomplete="off"
+                   style="margin-bottom: 9px ;margin-top: 4px"
+                    >
+            <a class="lf"></a>
+            <input type="password"id="pwd_1" maxlength="11"
+                   placeholder="请输入原密码" style="color:#222222;"onfocus=""/>
+            <p id="p">?*请输入正确的用户名和密码</p>
+            <a class="lf"></a>
+            <input type="password"id="pwd_2" maxlength="11" placeholder="请输入新密码"
+                   pattern="^(?![a-zA-Z]+$)(?![a-z0-9]+$)[a-zA-Z0-9]{6,8}$">
+            <a class="lf"></a>
+            <input type="password"id="pwd_3" maxlength="20" placeholder="请确认新密码"onblur="onBlur()" >
+            <b id="b"></b>
+            <button class="btn"type="button" id="btn">确&nbsp&nbsp&nbsp定</button>
+            <a href="Login.html"class="cs"> <botton  type="button">取&nbsp&nbsp&nbsp消</botton>
+            </a>
+
+        </div>
+        </form>
+    </div>
+    <footer>
+        <div class="footer">
+            <a href="#"class="rt"></a>
+        </div>
+    </footer>
+</section>
+
+<!-- 引入 jQuery 文件 -->
+<script src="../js/jquery/jquery.js"></div></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../js/bootstrap/bootstrap.js"></script>
+<script>
+    function onFocus(){
+
+    }
+    function onBlur(){
+        var val1=$("#pwd_2").val();
+        var val2=$("#pwd_3").val();
+//        var reg=/^(?![a-zA-Z]+$)(?![a-z0-9]+$)[a-zA-Z0-9]{6,8}$/;
+//        if(reg.test(val1)==false){
+//            $("#b").css({"display":"block"});
+//            $('#b').html("亲！密码强度不够");
+//            return;
+//        }
+       if(val1==val2&&val1!=""&&val2!=""){
+            $("#b").css({"display":"block"});
+            $('#b').html("亲！修改密码成功了");
+            return true;
+//            window.location.href = 'index.html';
+        }else if(val1!=val2){
+            $("#b").css({"display": "block"});
+        $('#b').html("亲！亲输入前后密码一致哦");
+            return false;
+        }else{
+            $("#b").css({"display": "block"});
+            $('#b').html("亲！密码不能为空哦！");
+            return false;
+    }
+    }
+</script>
+</body>
+</html>

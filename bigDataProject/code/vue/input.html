@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>表单控件</title>
+	<script src="../../js/vue-2.0.1/dist/vue.min.js"></script>
+</head>
+<body>
+<div class="input">
+	<currency-input v-model="price"></currency-input>
+</div>
+	<script>
+		Vue.component('currency-input',{
+			template:"<span>$<input ref='input' v-bind:value='value' v-on:input='updateValue($event.target.value)'/></span>",
+			props:['value'],
+			methods:{
+				updateValue:function(value){
+					var formattedValue = value.trim().slice(0,value.indexOf('.')+3);
+					if(formattedValue!== value){
+						this.$refs.input.value = formattedValue;
+					}
+					//通过input发出数值
+					this.$emit('input',Number(formattedValue))
+				}
+			}
+		});
+		new Vue({
+			el:".input",
+			data:{
+				price:""
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>进度条的三种状态</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/progress.css"/>
+
+</head>
+<body>
+<div class="wait">
+    <img src="http://static.oschina.net/uploads/space/2014/0430/115223_oFLD_1163935_thumb.gif"  alt=""/>
+    <span>数据提交中请耐心等待......</span>
+</div>
+<div class="progress pro1" style="width: 1000px;">
+    <div class="progress-bar progress-bar-striped submit active" role="progressbar"
+         aria-valuemin="0" aria-valuemax="100">
+        <span class="span"></span>%
+    </div>
+</div>
+<div class="img">
+    <img src="../images/xiong.gif" style="width: 500px"/>
+</div>
+<button class="btn1">等待</button>
+<button class="btn2">提交</button>
+<button class="btn3">失败</button>
+<!-- 引入 jQuery 文件 -->
+<script src="../js/jquery/jquery.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../js/bootstrap/bootstrap.js"></script>
+<script src="../js/progress1.js"></script>
+</body>
+</html>

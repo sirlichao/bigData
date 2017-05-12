@@ -1,0 +1,82 @@
+
+.go_next{
+    width:200px;
+    height: 200px;
+    position: relative;
+    float: left;
+}
+.go_next:hover{
+    background: #ffd700;
+    border-radius: 10px;
+    /*text-align: center;*/
+    /*outline: none;*/
+    cursor: pointer;
+}
+.go_next:hover>#go_next1,.cl_4{
+    background: #fff;
+
+}
+#go_next1{
+    width: 150px;
+    height: 100px;
+    border-left:1px solid #000;
+    border-bottom:1px solid #000;
+    /*margin:0 auto;*/
+    position: absolute;
+    top: 50px;
+    left: 25px;
+
+}
+#go_next1>div.cl_1{
+    width:25px;
+    height:25px;
+    background: #7571cd;
+    position: absolute;
+    bottom:0px;
+    left: 15px;
+}
+#go_next1>div.cl_2{
+    width:25px;
+    height:50px;
+    background: #e1787c;
+    position: absolute;
+    bottom:0px;
+    left: 55px;
+}
+#go_next1>div.cl_3{
+    width:25px;
+    height:75px;
+    background: #3dbd5c;
+    position: absolute;
+    bottom:0px;
+    left: 95px;
+}
+.go_next>div.cl_4{
+    width: 150px;
+    height: 100px;
+    border: 2px dotted #dddddd;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ddd;
+    line-height: 100px;
+    position: absolute;
+    top:50px;
+    left:25px;
+}
+.go_next>.p1{
+    color: indianred;
+    position: absolute;
+    bottom: 5px;
+    left: 50px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.go_next>.p2{
+    color: indianred;
+    position: absolute;
+    bottom: 5px;
+    left: 70px;
+    font-size: 14px;
+    font-weight: bold;
+}

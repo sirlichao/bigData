@@ -1,0 +1,421 @@
+#dsg-association-list{
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ddd;
+    width: 800px;
+    height: 550px;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    margin: -275px 0 0 -400px;
+}
+.dsg-association-head{
+    border-bottom:1px solid #dddddd;
+    height: 50px;
+    line-height: 50px;
+}
+.modal-hide{
+    font-size: 18px;
+    color: #dddddd;
+    font-weight:500;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.dsg-association-head>span{
+    font-size: 20px;
+    margin-left: 20px;
+}
+.dsg-association-body{
+    height: 450px;
+    border-bottom: 1px solid #dddddd;
+}
+.dsg-association-body .dsg-list-group{
+    /*border: 1px solid #dddddd;*/
+    margin-top:20px;
+    max-height: 400px;
+}
+.dsg-association-body .list-group{
+    height: 30px;
+    line-height: 30px;
+    background: #3399FF;
+    text-align: center;
+}
+.dsg-association-body .list-group>span{
+    display: inline-block;
+    color: #ffffff;
+    width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.dsg-group{
+    position: relative;
+    margin: 10px 0px;
+}
+/*拖动模块*/
+.dropContainer{
+    padding: 15px;
+    box-sizing: content-box;
+    min-height: 160px;
+    overflow: auto;
+    border: 1px dotted #ccc;
+    position: relative;
+    min-width: 30px;
+}
+.dsg-remove{
+    position: absolute;
+    top: 0px;
+    right: 1px;
+    z-index: 3;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.relative-wrap{
+    position: relative;
+    /*width: 100%;*/
+    max-width: 1600px;
+    /*box-sizing:border-box;*/
+    white-space:nowrap;
+    float: left;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 160px;
+    display: inline-flex;
+}
+.dsg-grop-table{
+    padding: 5px;
+    box-sizing: content-box;
+    min-height: 200px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    position: relative;
+    min-width: 30px;
+}
+/*脚步*/
+.dsg-association-foot{
+    height: 46px;
+    line-height: 46px;
+}
+.dsg-association-foot>input{
+    display: inline-block;
+    box-shadow: none;
+    height: 30px;
+}
+.dsg-association-foot>button{
+    margin: 0px 10px;
+}
+.move{
+    border: 1px solid #0071c5;
+    border-radius: 3px;
+    background: #d2d2d2;
+    opacity: 0.5;
+    color: #006600;
+    height: 30px;
+    line-height:30px;
+    position: absolute;
+    z-index:1000000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 150px;
+    overflow: hidden;
+}
+.dropMove1{
+    /*list-style-type: none;*/
+    float: left;
+    cursor:move;
+    text-align:center;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    width: 190px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    overflow: hidden;
+    background:#E7E7E7;
+    border-radius: 3px;
+    border: 0 solid #CCC;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding-right:10px;
+}
+/*连接线*/
+#line-node{
+    /*display: none;*/
+    float: left;
+    height:1px;
+    width: 135px;
+    background-color: #BBB;
+    position: relative;
+    top: 20px;
+}
+#line-node:hover{
+    opacity: .5;
+}
+#line-node i:first-child{
+    position: absolute;
+    top: -1.5px;
+    left: -1.5px;
+    width: 3px;
+    height:3px;
+    border-radius:50%;
+    background: #BBB;
+}
+#line-node i:last-child{
+    position: absolute;
+    top: -1.5px;
+    right:-1.5px;
+    width: 3px;
+    height:3px;
+    border-radius:50%;
+    background: #BBB;
+}
+#line-node em{
+    background: url("../../images/dataAnalysis/weiguanl.png") no-repeat;
+    display: inline-block;
+    width: 39px;
+    height: 24px;
+    border: 0 solid #888;
+    position: absolute;
+    top: -6px;left: 58px;
+    background-size: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+/*菜单项*/
+.line-menu-list{
+    /*display: none;*/
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background:#999999;
+    font-size: 20px;
+    text-align: center;
+}
+.line-menu-list a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.line-menu-list a:hover{
+    opacity: .5;
+    cursor: pointer;
+}
+/*小模态框*/
+select{
+    outline: none;
+}
+#autoRelativeDialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    /*display: none;*/
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+.dsg-modal{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    /*display: none;*/
+    overflow: hidden;
+    outline: 0;
+}
+.dsg-modal-wrap{
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+}
+.dsg-modal-dialog{
+    position: relative;
+    margin: 10px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.dsg-modal-content{
+    width: 522px!important;
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    /*max-height: 400px;*/
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    outline: 0;
+    box-shadow: 0 8px 28px rgba(0,0,0,.3);
+    border-radius: 6px;
+}
+/*头部*/
+.dsg-modal-header{
+    height: 60px;
+    padding: 20px 30px;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+}
+button.close{
+    opacity: 1;
+    width: 21px;
+    background: #ddd;
+    border-radius: 50%;
+    outline: none;
+    top: -4px;
+    position: absolute;
+    right: -4px;
+    margin-top: -2px;
+    -webkit-appearance: none;
+    padding: 0;
+    font-size: 21px;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+}
+.dsg-modal-title {
+    font-size: 20px;
+    font-weight: 400;
+    color: #666;
+}
+/*模态框身体*/
+.modal-body{
+    position: relative;
+    padding: 20px 30px;
+    min-width: 300px;
+}
+.line-edit-wrap{
+    width: 460px;
+    border: 1px solid #AAA;
+    line-height: 32px;
+    background: #FFF;
+}
+.line-edit-wrap select{
+    width: 100%;
+    height: 100%;
+    line-height: 30px;
+    border: 0;
+    padding-left: 1em;
+    color: #555;
+}
+.line-type-item{
+    width: 25%;
+    height: 60px;
+    float: left;
+    border-left: 1px #AAA solid;
+    /*background: center 10px no-repeat;*/
+    text-align: center;
+    padding-top: 30px;
+    position: relative;
+}
+.line-type-item:first-child{
+    border-left: 0px;
+}
+.inner{
+    background: url("../../images/dataAnalysis/neibu.png") center 10px no-repeat;
+}
+.left{
+    background: url("../../images/dataAnalysis/zuoce.png") center 10px no-repeat;
+}
+.right{
+    background: url("../../images/dataAnalysis/youce.png") center 10px no-repeat;
+}
+.full{
+    background: url("../../images/dataAnalysis/weiguanl.png") center 10px no-repeat;
+}
+.current{
+    background-color: #CCC;
+}
+.mask{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #FFF;
+    position: absolute;
+    opacity: .7;
+}
+.line-type-item:hover{
+    background-color: #CCC;
+}
+.line-table-wrap{
+    border: 1px solid #AAA;
+    border-left-width: 0;
+    border-right-width: 0;
+    box-sizing: content-box;
+    clear: both;
+}
+.line-table-item{
+    width: 50%;
+    height: 100%;
+    float: left;
+    border-left: 1px #AAA solid;
+    line-height: 32px;
+}
+.line-table-item:first-child{
+    border-left: 0px;
+}
+.line-field-item {
+    /*border-bottom: 1px #AAA solid;*/
+    position: relative;
+}
+.line-field-item:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.line-field-remove{
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
+    border: 1px solid #AAA;
+    border-radius: 50%;
+    background:#FFF;
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    text-align: center;
+}
+.line-field-item>div{
+    height: 100%;
+    float: left;
+    border-left: 1px #AAA solid;
+}
+.line-field-item>div:first-child{
+    border-left: 0px;
+}
+.line-field-field{
+    width: 45%;
+    text-align: center;
+    /*border-bottom: 1px #AAA solid;*/
+}
+.line-field-gap{
+    width: 10%;
+    text-align: center;
+    /*border-bottom: 1px #AAA solid;*/
+}
+.line-add-field{
+    padding-left: 1em;
+    color: #AAA;
+}
+.line-add-field a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 6px;
+}
+#association-fadeIn{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #333333;
+    opacity: .3;
+}

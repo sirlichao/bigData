@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据源MySQL语句</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/model.css"/>
+    <!--<link rel="stylesheet" href="../css/index.css"/>-->
+    <link rel="stylesheet" href="../../css/Hbase.css"/>
+    <style>
+        .mySql>form.mySql_user>div.Hbase{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="nav navbar-default navbar-fixed-top">
+    <div class="">
+        <div style="width: 200px" class="lf">
+            <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据源</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+                <li>
+                    <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="">
+                            <a href="#" data-toggle="modal" data-target="#myModal">添加数据源</a>
+                        </li>
+                        <li><a href="#" data-toggle="modal" data-target="#myModal">导入Excel</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#myModal">数据市场</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" data-target="#myModal" data-toggle="modal">数据分析</a>
+                </li>
+                <li>
+                    <a href="#" data-target="#myModal" data-toggle="modal">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#"><span id="navList">DSG&nbsp;</span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="">演示账户</a></li>
+                        <li><a href="#">激活</a></li>
+                        <li><a href="">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mySql">
+    <form class="mySql_user">
+        <div class="row">
+            <label class="col-sm-4">数据源名称：</label>
+            <div class="col-sm-7"><input type="text" maxlength="10" required placeholder="我的数据源" name="myDataSourrce"id="myDataSourrce"/></div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">主机名域：</label>
+            <div class="col-sm-7"><input type="text" maxlength="20" required placeholder="输入主机名域IP:例如：192.168.1.188"name="realmName"id="realmName"/></div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">数据库端口：</label>
+            <div class="col-sm-7"><input type="text" maxlength="10" name="dataPort" id="dataPort" required placeholder="3306" pattern="/\d/"/></div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">数据库用户名：</label>
+            <div class="col-sm-7"><input type="text" maxlength="10" name="userName" id="userName" required/></div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">用户名密码：</label>
+            <div class="col-sm-7"><input type="password" maxlength="20" name="pwd" id="pwd" required/></div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">数据库名：</label>
+
+            <div class="col-sm-7"><input type="text" maxlength="10" required name="dataName"id="dataName"/></div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">是否导入Hbase：</label>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="radio" value="是"/>&nbsp;是&nbsp;&nbsp;<input type="radio" value="否" name="radio"/>&nbsp;否</label>
+        </div>
+        <div class="row Hbase">
+            <label class="col-sm-4">Hbase表名：</label>
+            <div class="col-sm-7"><input type="text" maxlength="10" required name="tableName"id="tableName"/></div>
+        </div>
+        <div class="row Hbase">
+            <label class="col-sm-4">Hbase列组：</label>
+            <div class="col-sm-7"><input type="text" maxlength="10" required name="listGroup"id="listGroup"/></div>
+        </div>
+    </form>
+
+    <div class="img">
+        <img src="../../images/mysql/mysql_right1.png" alt=""/>
+        <div>
+            <p> GRANT SELECT,SHOW VIEW on '数据库名'.*to '用户名'@'%'IDENTI</p>
+            <p>FIED BY '密码' WITH GRANT OPTION;FLUSH PRIVILEGES</p>
+        </div>
+    </div>
+</div>
+<!--页脚部分-->
+<div class="footer navbar-fixed-bottom">
+    <button class="btn btn-info rt" disabled>连接</button>
+    <button class="btn btn-default rt">上一步</button>
+</div>
+
+
+<!--模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">选择应用</h3>
+            </div>
+            <div class="modal-body"style="overflow: hidden">
+                <div class="go_next">
+                    <div id="go_next1">
+                        <div class="cl_1"></div>
+                        <div class="cl_2"></div>
+                        <div class="cl_3"></div>
+                    </div>
+                    <p class="p1">新建文本文档</p>
+                </div>
+                <div class="go_next">
+                    <div CLASS="cl_4">
+                        +
+                    </div>
+                    <p class="p2">新建应用</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框-->
+<!-- 引入 jQuery 文件 -->
+<script src="../../js/jquery/jquery.js"></script>
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<script src="../../js/bootstrap/bootstrap.js"></script>
+<script src="../../js/Hbase.js"></script>
+
+</body>
+</html>

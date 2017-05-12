@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Vueinput</title>
+	<script src="../../js/vue-2.0.1/dist/vue.min.js"></script>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div id="app">
+		<curreny-input label="Price" v-model="price"></curreny-input>
+		<curreny-input label="Shipping" v-model="shipping"></curreny-input>
+		<curreny-input label="Handling" v-model="handling"></curreny-input>
+		<curreny-input label="Discount" v-model="discount"></curreny-input>
+		<p>total:${{total}}</p>
+	</div>
+	<script>
+		Vue.component('curreny-input',{
+			template:'<div><label v-if="label">{{label}}</label><input v-bind:value="value" ref="input" v-on:input=updateValue($event.target.value) v-on:focus="selectAll" v-on:blur="formatValue"/></div>',
+			props:{
+				value:{
+					type:Number,
+					default:0
+				},
+				label:{
+					type:String,
+					default:''
+				}
+			},
+			methods:{
+				updateValue:function(value){
+					var result = currencyValidator.parse(value,this.value);
+					if(result.warning){
+						this.$refs.input.value = result.value;
+					}
+					this.$emit('input',result.value)
+				},
+				formatValue:function(){
+					this.$refs.input.value = currencyValidator.format(this.value)
+				},
+				selectAll:function(event){
+					setTimeout(function(){
+						event.target.select()
+					},0)
+				}
+			}
+		});
+		new Vue({
+			el:"#app",
+			data:{
+				price:0,
+				shipping:0,
+				handling:0,
+				discount:0
+			},
+			computed:{
+				total:function(){
+					return ((
+        				this.price * 100 + 
+        				this.shipping * 100 + 
+        				this.handling * 100 - 
+        				this.discount * 100
+      					) / 100).toFixed(2)
+				}
+			}
+		})
+	</script>
+</body>
+</html>

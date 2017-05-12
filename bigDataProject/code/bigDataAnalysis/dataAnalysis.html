@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据分析</title>
+    <link rel="stylesheet" href="../../css/dataAnalysis/index.css"/>
+    <script src="../../js/jquery/jquery.js"></script>
+    <script src="../../js/jquery/jquery-ui.js"></script>
+    <script src="../../js/echarts/dist/echarts.js"></script>
+    <script src="../../js/echarts/dist/infographic.js"></script>
+    <script src="../../js/bootstrap/bootstrap.js"></script>
+    <script src="../../js/dataAnalysis/dataAnalysis.js"></script>
+    <script src="../../js/dataAnalysis/addTree.js"></script>
+    <style>
+        [v-cloak] {
+              display: none;
+            }
+    </style>
+</head>
+<body>
+<div class="body">
+    <div class="nav navbar-default navbar-fixed-top">
+    <div>
+        <div style="width: 200px" class="lf">
+            <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+            <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;数据分析</span>
+        </div>
+        <div class="rt">
+            <ul id="list">
+
+                <li>
+                    <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                    <ul>
+                        <li class="" data-toggle="modal" data-target="#myModal">
+                            <a href="#">添加数据源</a>
+                        </li>
+                        <li><a href="#">导入Excel</a></li>
+                        <li><a href="#">数据市场</a></li>
+                    </ul>
+                </li>
+                <li data-target="#myModal" data-toggle="modal">
+                    <a href="#">数据分析</a>
+                </li>
+                <li data-toggle="modal" data-target="#myModal">
+                    <a href="#">仪表盘</a>
+                </li>
+                <li>
+                    <a href="#"><span id="navList" class="icon-user-md"></span><span class="caret"></span></a>
+                    <ul>
+                        <li><a href="#">15690053779</a></li>
+                        <li><a id="task" @click="isShow = !isShow">任务管理器</a></li>
+                        <li><a href="javascript:;">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="dsg-mian">
+        <div class="dsg-left">
+            <div class="dsg-left-main">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href=".myData" role="tab" data-toggle="tab">我的数据</a></li>
+                </ul>
+                <div class="tab-content heightAll" data-spy="scroll">
+                    <div role="tabpanel" class="tab-pane active myData">
+                        <div class="dsg-group-header">
+                            <div class="dsg-search">
+                                <form action="">
+                                    <input type="text" class="search-txt" name="txt" id="search" placeholder="输入你搜索的内容"/>
+                                    <span class="glyphicon glyphicon-search search"></span>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="dsg-group-scroll">
+                            <ul class="dsg-group-theme panel-group" id="accordion">
+                                <li></li>
+                                <li>
+                                    <div class="addData">
+                                        <span>
+                                            你当前没有数据
+                                            <br/>
+                                            请点击添加
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="list-drag">
+                                    <div type="button" class="dragName"data-parent="#accordion" data-toggle="collapse" data-target="#demo" aria-expanded="true" aria-controls="demo">
+                                        <div class="dsg-myData">我dddddddddddddddd的数据</div>
+                                    </div>
+                                    <form action="" class="drag-rename">
+                                        <input type="text" style="width:150px;height: 25px;line-height: 25px;padding-right: 16px" name="text" class="text"/>
+                                        <img src="../../images/yzwc.png" class="sure" style="width: 14px;" alt=""/>
+                                    </form>
+                                    <div class="btn-group dataName">
+                                        <span class="caret data-down" style="color: #fff;"></span>
+                                    </div>
+                                    <ul class="collapse in coll" id="demo">
+                                        <li>
+                                                <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">维度</span>
+                                                <div class="btn-group">
+                                                    <span class="caret dimension-down"></span>
+                                                </div>
+                                            <ul>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="1">heheheh</a>
+
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="2">aaawdwaddadadadadaaaa</a>
+
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                                <span style="font-size: 14px;font-weight: bold;position: relative;top: 0px;left: 3px;">量度</span>
+                                                <div class="btn-group">
+                                                    <span class="caret measure-down"></span>
+                                                </div>
+                                            <ul>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="7">Wii</a>
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret measure-downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="8">我了</a>
+
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret measure-downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="list-drag">
+                                    <div type="button" class="dragName"data-parent="#accordion" data-toggle="collapse" data-target="#demo1" aria-expanded="true" aria-controls="demo1">
+                                        <div class="dsg-myData">我的数据</div>
+                                    </div>
+                                    <form action="" class="drag-rename">
+                                        <input type="text" style="width:150px;height: 25px;line-height: 25px;padding-right: 16px" name="text" class="text"/>
+                                        <img src="../../images/yzwc.png" class="sure" style="width: 14px;" alt=""/>
+                                    </form>
+                                    <div class="btn-group dataName">
+                                        <span class="caret data-down" style="color: #fff;"></span>
+                                    </div>
+                                    <ul class="collapse in coll" id="demo1">
+                                        <li>
+                                            <div class="dimension" style="height: 20px;line-height: 20px;position: relative">
+                                                <span style="font-size: 14px;font-weight: bold;position: absolute;top: 0px;left: 3px;">维度</span>
+                                                <div class="btn-group">
+                                                    <span class="caret dimension-down"></span>
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="3">aaawdwaddadadadadaaaa</a>
+
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="4">awaaaa</a>
+
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="measure" style="height: 20px;line-height: 20px;position: relative">
+                                                <span style="font-size: 14px;font-weight: bold;position: absolute;top: 0px;left: 3px;">量度</span>
+                                                <div class="btn-group">
+                                                    <span class="caret measure-down"></span>
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="5">aaavv</a>
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret measure-downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                                <li class="group-second-body">
+                                                    <span class="icon glyphicon glyphicon-time"></span>
+                                                    <div class="group-item">
+                                                        <a href="#" class="drag-content" data-value="6">aaawdwaddadadadadaaaa</a>
+
+                                                        <div class="btn-group btnG">
+                                                            <span class="caret measure-downList"></span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="" class="group-item-form">
+                                                        <input type="text" class="group-item-txt" />
+                                                        <span class="glyphicon glyphicon-ok list-sure"></span>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="publicData">...</div>
+                    <div role="tabpanel" class="tab-pane" id="exampleData">.. ds .</div>
+                </div>
+            </div>
+        </div>
+        <div class="dsg-center row">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href=".dsgtabs-cont" role="tab" data-toggle="tab">我的数据</a></li>
+                <li role="presentation"><a href="#mySql" role="tab" data-toggle="tab">SQL语句</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="dsgtabs-cont tab-pane active" role="tabpanel">
+                    <div class="dsgtabs-head">
+                        <div class="col-md-6">
+                            <div class="dsgmodel-label">
+                                <img src="../../images/dataAnalysis/columnicon.png" alt=""/>
+                                行：
+                            </div>
+                            <div class="row-content row-view">
+                                <!--<span class="glyphicon glyphicon-remove remove"></span>-->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!--<span class=" icon-retweet exchange"></span>-->
+                            &nbsp;&nbsp;
+                            <div class="dsgmodel-label">
+                                <img src="../../images/dataAnalysis/rowicon.png" alt=""/>
+                                列：
+                            </div>
+                            <div class="row-content list-view">
+                                <!--<span class="glyphicon glyphicon-remove remove"></span>-->
+                            </div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div>
+                        <div class="col-md-10 drag-show">
+                            <div  class="drag-view">
+                                <div class="analyseResult">
+                                    <img src="../../images/07.png" alt=""/>
+                                    <p>请将左维度、度量拖入建模区（列、行、标记）</p>
+                                </div>
+                                <div class="drag-show-view">
+                                    <div class="pit-show" id="show" style="background: #ddd;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="drag-photo col-md-2" style="">
+                            <ul class="nav nav-tabs" role="tablist" style="border: 0px;background: #dddddd">
+                                <li role="presentation" class="active" style="width: 80px"><a href="#freqently" role="tab" data-toggle="tab" style="border: 0px">常用的</a></li>
+                                <li role="presentation" style="width: 80px"><a href="#all" role="tab" data-toggle="tab" style="border: 0px">全部</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="freqently">
+                                    <!--<div><img src="../../images/dataAnalysis/1006.svg" alt=""/></div>-->
+                                    <!--<div><img src="../../images/dataAnalysis/1101.svg" alt=""/></div>-->
+                                    <!--<div><img src="../../images/dataAnalysis/1105.svg" alt=""/></div>-->
+                                    <div id="pie"><img src="../../images/dataAnalysis/2001.svg" alt=""/></div>
+                                    <div id="scatter"><img src="../../images/dataAnalysis/3001.svg" alt=""/></div>
+                                    <div id="line"><img src="../../images/dataAnalysis/3101.svg" alt=""/></div>
+                                    <div id="stepLine"><img src="../../images/dataAnalysis/3103.svg" alt=""/></div>
+                                    <!--<div><img src="../../images/dataAnalysis/3301.svg" alt=""/></div>-->
+                                    <div id="bar_compositionX"><img src="../../images/dataAnalysis/3302.svg" alt=""/></div>
+                                    <div id="bar"><img src="../../images/dataAnalysis/3303.svg" alt=""/></div>
+                                    <!--<div><img src="../../images/dataAnalysis/3401.svg" alt=""/></div>-->
+                                    <div id="bar_compositionY"><img src="../../images/dataAnalysis/3402.svg" alt=""/></div>
+                                    <div id="changeBar"><img src="../../images/dataAnalysis/3403.svg" alt=""/></div>
+                                    <div><img src="../../images/dataAnalysis/3601.svg" alt=""/></div>
+                                    <div id="pileLine"><img src="../../images/dataAnalysis/4101.svg" alt=""/></div>
+                                    <div id="pileLineM"><img src="../../images/dataAnalysis/4102.svg" alt=""/></div>
+                                    <!--<div><img src="../../images/dataAnalysis/4103.svg" alt=""/></div>-->
+                                    <!--<div id="map"><img src="../../images/dataAnalysis/5001.svg" alt=""/></div>-->
+                                    <!--<div><img src="../../images/dataAnalysis/10002.svg" alt=""/></div>-->
+                                    <!--<div><img src="../../images/dataAnalysis/10003.svg" alt=""/></div>-->
+                                    <div id="waterPolo" title="水球图"><img src="../../images/dataAnalysis/10004.svg" alt=""/></div>
+                                    <div id="gaue" title="仪表盘"><img src="../../images/dataAnalysis/11001.svg" alt=""/></div>
+                                    <!--<div><img src="../../images/dataAnalysis/11041.svg" alt=""/></div>-->
+                                    <!--<div><img src="../../images/dataAnalysis/20001..svg" alt=""/></div>-->
+                                    <!--<div><img src="../../images/dataAnalysis/21001.svg" alt=""/></div>-->
+                                    <div><img src="../../images/dataAnalysis/5002.svg" alt=""/></div>
+                                    <div id="meiGui" title="玫瑰图"><img src="../../images/dataAnalysis/meigui.jpg" alt=""/></div>
+                                    <div id="louDou" title="漏斗图"><img src="../../images/dataAnalysis/loudou.jpg" alt=""/></div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="all">lalalllal.</div>
+                            </div>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+                <div id="mySql" role="tabpanel" class="tab-pane mySlq" style="width: 100%;height: 509px;border: 1px solid #dbdbdb;border-top: 0; background: #fff">
+                    <div class="sqlDdata" style="width: 95%;height:450px;background: #ddd;margin: 0 auto;cursor: not-allowed; position: relative;padding:10px;top: 25px;border-radius: 10px" disabled>
+                        lallalla
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="action-list"></div>
+
+    </div>
+    <footer>
+        <div class="footer">
+            <a href="#"class="rt"></a>
+        </div>
+    </footer>
+    <!-- 进度条-->
+    <div id="loading" style="display: none">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+                <div class="object"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 创建参数字段-->
+    <div class="edit">
+        <div class="edit-title">
+            <h4>   编辑参数</h4>
+            <span class="glyphicon glyphicon-remove title-remove"></span>
+        </div>
+        <div class="edit-body">
+            <div class="edit-body-content">
+                <span class="edit-info">将左侧维度拖入此区域（可拖入多个维度）</span>
+                <span class="glyphicon glyphicon-remove content-remove"></span>
+            </div>
+        </div>
+        <div class="edit-footer">
+            <button type="button" class="btn btn-info rt edit-sure">确定</button>
+            <form action="">
+                <input type="text" class="footer-text rt" placeholder="请输入参数名"/>
+            </form>
+        </div>
+    </div>
+    <!-- 创建计算字段-->
+    <div class="modal-dialog" style="display: none">
+        <div class="fadeIn"></div>
+        <div class="modal-content" style="">
+            <div class="dsg-modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span id="creat-close" style="font-size: 30px;color: #333">&times;</span></button>
+                <h4 class="modal-title">创建计算字段</h4>
+            </div>
+            <div class="dsg-modal-body">
+                <div class="creat-field-wrap" style="height: 400px;">
+                    <div class="top" style="min-height: 400px;">
+                        <div class="content">
+                            <form action="">
+                                <input type="text" style="" value="计算字段1"/>
+                            </form>
+                            <div class="content-wrap">
+                                <div class="content-text" contenteditable="true"></div>
+                            </div>
+                        </div>
+                        <div class="fun-list lf">
+                            &nbsp;<span>函数</span>
+                            <div class="fun-select">
+                                <select name="" value="5" id="">
+                                    <option value="">全部</option>
+                                    <option value="0">数字</option>
+                                    <option value="1">字符串</option>
+                                    <option value="2">日期</option>
+                                    <option value="3">聚合</option>
+                                    <option value="4">逻辑</option>
+                                </select>
+                                <span class="glyphicon glyphicon-search"></span>
+                            </div>
+                            <form action="">
+                                <input type="text" class="fun-txt"/>
+                            </form>
+                            <ul class="create-list-group">
+                                <li class=""><a href="#">lichao</a></li>
+                            </ul>
+                        </div>
+                        <div class="fun-desc rt">
+                            &nbsp;<span>字段名</span>
+                            <form action="">
+                                <input type="text" class="desc-serch" name="data" id="data" placeholder="输入你要搜索的字段名"/>
+                            </form>
+                            <ul class="create-panel-group">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dsg-modal-footer">
+                <span>无效的计算公式</span>
+                <button type="button" class="btn btn-info" disabled>确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+    <!-- 任务管理器-->
+    <div id="task-modal" v-if="isShow" v-cloak>
+        <div class="easyui-accordion" style="width: 798px;height: 350px;overflow: auto">
+            <div title="任务" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+                <table class="table table-responsive table-striped  table-hover">
+                <thead>
+                    <tr>
+                        <th>数据名称</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                        <th>详细信息</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="task in taskList">
+                        <td><span class="icon-tasks" style="color: #01AAF9;"></span>{{task.taskName}}</td>
+                        <td>
+                            <div v-if="false" class="progress" style="width: 142px; height: 14px;margin: 0px" title="正在提交中.....">
+                            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
+                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 142px;line-height: 14px">
+                                正在提交中......
+                            </div>
+                        </div>
+                            <img src="../../js/easyUI/themes/icons/ok.png" v-if="task.progress==100">
+                            <progress :value="task.progress" min="0"max="100" v-if="task.progress!=100"></progress><span>{{task.progress}}%</span>
+                            <div v-if="false" class="progress" style="width: 142px; height: 14px;margin: 0px;" title="正在提交中.....">
+                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"
+                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 142px;line-height: 14px">
+                                    提交失败......
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" @click="del(task)">删除</button>
+                        </td>
+                        <td>
+                            <a href="javascript:;">详情</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="task-foot">
+            <a class="button button-primary button-rounded button-small" @click="isShow=false">确定</a>
+        </div>
+    </div>
+    <div id="fadeIn" v-if="isShow" @click="isShow=false" v-cloak></div>
+     <!-- 数据关联-->
+    <div id="association" style="display: none">
+        <div id="association-fadeIn"></div>
+        <div id="dsg-association-list">
+            <div class="association-list">
+                <div class="dsg-association-head">
+                    <span>关联表</span>
+                    <strong class="icon-remove modal-hide" style=""></strong>
+                </div>
+                <div class="dsg-association-body" style="position:relative;">
+                    <div class="col-md-3">
+                        <div class="dsg-list-group">
+
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="condition">
+                            <div class="dsg-group">
+                                <a href="#" class="dsg-remove"><img src="../../images/dataAnalysis/remove.png" alt=""/></a>
+                                <div class="dropContainer">
+                                    <p class="drop-info" style="font-size: 12px;color: #DBDBDB">请拖入你想关联的数据</p>
+                                    <div class="relative-wrap">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dsg-group">
+                                <div class="dsg-grop-table" style = "display: none">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="autoRelativeDialog" style="display: none;">
+                        <div class="dsg-modal">
+                            <div class="dsg-modal-wrap">
+                                <div class="dsg-modal-dialog">
+                                    <div class="dsg-modal-content animation">
+                                        <div class="dsg-modal-header">
+                                            <span class="icon-Setthewindow"></span>
+                                            <button type="button" class="close">
+                                                <span>×</span>
+                                            </button>
+                                            <h4 class="modal-title dsg-modal-title">数据表关联设置<span></span>
+                                            </h4>
+                                        </div>
+                                        <div class="dsg-modal-body modal-body line-menu-edit-wrap-content">
+                                            <div class="line-menu" data-index="0" data-type="inner">
+                                                <div class="line-edit-wrap">
+                                                    <div class="line-type-wrap">
+                                                        <div class="line-type-item inner current"  data-value="inner">内部</div>
+                                                        <div class="line-type-item left" data-value="left">左侧</div>
+                                                        <div class="line-type-item right" data-value="right">右侧<div class="mask" title="暂未开放"></div></div>
+                                                        <div class="line-type-item full" data-value="full">完全外部<div class="mask" title="暂未开放"></div></div>
+                                                    </div>
+                                                    <div class="line-table-wrap">
+                                                        <div class="line-table-item">
+                                                            <select name="table1"></select>
+                                                        </div>
+                                                        <div class="line-table-item">
+                                                            <select name="table2"></select>
+                                                        </div>
+                                                        <div style="clear: both"></div>
+                                                    </div>
+                                                    <div class="line-field-wrap">
+                                                        <div class="line-field-item">
+                                                            <div class="line-field-field">
+                                                                <select name="field1"><option value="">===请选择===</option></select>
+                                                            </div>
+                                                            <div class="line-field-gap">
+                                                                =
+                                                            </div>
+                                                            <div class="line-field-field">
+                                                                <select name="field2"><option value="">===请选择===</option></select>
+                                                            </div>
+                                                            <!--<a href="javascript:" class="line-field-remove icon-remove" title="删除此行"></a>-->
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="line-add-field">-->
+                                                    <!--<a href="javascript:;" data-click="line-menu-field-add" style="color:#555">添加新的关联字段</a>-->
+                                                    <!--</div>-->
+                                                    <div style="clear:both"></div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <a class="dsg-btn-1" href="javascript:" style="margin-top:20px;">保存</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+                <div class="dsg-association-foot text-right">
+                    <span style="display: none;">请编辑关联~</span>
+                    <span class="tip-warp"  style="display: none;">关联已刷新</span>
+                    <span class="redstar" style="color: red">*</span>
+                    <input type="text" placeholder="在这里输入保存的名称"/>
+                    <button class="btn btn-info">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- 引入 jQuery 文件 -->
+    <script src="../../js/dataAnalysis/dataAssociation.js"></script>
+    <script src="../../js/vue-2.0.1/dist/vue.js"></script>
+    <script src="../../js/vue-resurce/dist/vue-resource.js"></script>
+    <script type="application/javascript">
+        new Vue({
+            el:".body",
+            data:{
+                taskList:[],
+                isShow:false
+            },
+            mounted:function(){
+                this.$nextTick(function(){
+                    this.request();
+                })
+            },
+            methods:{
+                request:function(){
+                    var _this=this;
+                    this.$http.get('../../json/dataAnalysisJson/task.json').then(function(res){
+                        _this.taskList=res.body.tasks;
+                    })
+                },
+                del:function(task){
+                    var _this = this
+                    var $index=_this.taskList.indexOf(task);
+                    this.taskList.splice($index,1);
+                }
+            }
+        });
+        $(function(){
+            $('#freqently>div').on('click',function(){
+                $(this).css({'background':'#CECECE'})
+                $(this).siblings().css({'background':'#F2F2F2'})
+            })
+            $('#creat-close').on('click',function(){
+                $('.modal-dialog').hide(1000);
+            });
+
+        })
+//        function unique(ary){
+//            var obj = {};
+//            for(var i= 0;i<ary.length;i++){
+//                var cur = ary[i];
+//                if(obj[cur] == cur){
+//                    ary[i] = ary[ary.length-1];
+//                    ary.length--;
+//                    i--;
+//                    continue;
+//                }
+//                obj[cur] = cur;
+//            }
+//            return ary;
+//        }
+//        console.log(unique([1,1,2,2,4,4,4,4,6,6,7,]));
+    </script>
+</body>
+</html>

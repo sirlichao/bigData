@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <!-- 让 Bootstrap 兼容 IE 兼容模型 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 让 Bootstrap 兼容 国产浏览器的高速模型 -->
+    <meta name="renderer" content="webkit">
+    <!-- 实现响应式的设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据源界面</title>
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index2.css"/>
+    <!--<link rel="stylesheet" href="../css/model.css"/>-->
+    <style>
+        .pro{
+            border: 1px dotted #dddddd;
+            text-align: center;
+            line-height: 200px;
+            cursor: pointer;
+            display: none;
+            /*position: absolute;*/
+            top: 0px;
+            left: 360px;
+            
+        }
+        .pro:hover{
+            border: 1px dotted #009DDC;
+
+        }
+        .pro:hover>span{
+            color:#009DDC;
+        }
+        .pro>span{
+            font-size: 60px;
+            color: #dddddd;
+        }
+        .searchHead {
+            width: 900px;
+            margin: 0 auto;
+            display: none;
+            /*position: fixed;*/
+            /*height: 30px;*/
+        }
+        .searchHead .head_title {
+            /*display: none;*/
+            line-height: 35px;
+            position:relative;
+            z-index: 10;
+            background: #FFFFFF;
+            /*text-align: center;*/
+        }
+        .searchHead ul,label {
+           display: inline-block;
+            height: 30px;
+
+            /*text-align: center;*/
+        }
+        ul.list-inline{
+            margin-left: 20px;
+            /*text-align: center;*/
+        }
+        .searchHead>ul>li {
+            /*display: inline-block;*/
+            width: 100px;
+            height: 30px;
+            text-align: center;
+
+        }
+        .down {
+            width: 900px;
+            height: 150px;
+            border: 1px solid #d0e9c6;
+            background: #FFFFFF;
+            /*display: none;*/
+        }
+        .down>ul>li {
+            width: 300px;
+            height: 40px;
+            /*display: inline-block;*/
+        }
+        .down>ul>li>label{
+            cursor: pointer;
+        }
+        .dashed {
+            height: 1px;
+            width: 100%;
+            border: 1px dashed #333;
+        }
+    </style>
+</head>
+<body style="font-family: '微软雅黑'">
+<div id="mian">
+    <div class="nav navbar-default navbar-fixed-top">
+        <div>
+            <div style="width: 200px" class="lf">
+                <a href="#"> <img src="../../images/07.png" style="width: 90px;"/></a>
+                <span style="font-size: 18px">&nbsp;&nbsp;| &nbsp;&nbsp;应用列表</span>
+            </div>
+            <div class="rt">
+                <ul id="list">
+                    <li>
+                        <a href="#">数据源&nbsp;<span class="caret"></span></a>
+                        <ul>
+                            <li class="" data-toggle="modal" data-target="#myModal">
+                                <a href="#">添加数据源</a>
+                            </li>
+                            <li><a href="#">导入Excel</a></li>
+                        </ul>
+                    </li>
+                    <li data-target="#myModal" data-toggle="modal">
+                        <a href="#">数据分析</a>
+                    </li>
+                    <li data-toggle="modal" data-target="#myModal">
+                        <a href="#">仪表盘</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="navList"><img src="../../images/user.jpg" alt=""/></span><span class="caret"></span></a>
+                        <ul>
+                            <li><a href="#">用户管理</a></li>
+                            <li><a href="#">修改密码</a></li>
+                            <li><a href="">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="form"class="container">
+        <form action="">
+            <label>
+                <input type="text"placeholder="输入应用列表名/数据源名/仪表盘/图表名进行搜索"/>
+                <span style="cursor: pointer" id="dropDown"></span>
+            </label>
+            <a class="btn btn-info rt" style="margin-top: 13px"data-toggle="modal" data-target="#myModal2">新建应用</a>
+
+
+        </form>
+
+        <div class="searchHead">
+            <div class="head_title">
+                <label>搜索结果</label>
+                <ul class="list-inline">
+                    <li class="all">全部(<span>0</span>)</li>
+                    <li class="li">应用列表(<span>0</span>)</li>
+                    <li class="datasource">数据源(<span>0</span>)</li>
+                    <li class="dashboard">仪表盘(<span>0</span>)</li>
+                    <li class="chart">图表(<span>0</span>)</li>
+                </ul>
+                <label id="up" style="float: right;color: #23ccfe"><span>^收起</span></label>
+            </div>
+
+            <div class="down">
+                <ul style=""class="list-inline">
+                    <li><span>应用列表&nbsp;|&nbsp;</span><label>西西软件园</label></li>
+                    <!--<p class="dashed"></p>-->
+                    <!--<li>数据源<span>|</span><label>西西软件园</label></li>-->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="mian_1">
+        <div class="c1">
+            &nbsp;&nbsp;&nbsp;&nbsp;<span>我的应用</span>
+            <div class="c2">
+                <!--<div class="add_1">-->
+                    <!--<span style="font-size: 50px;">+</span>-->
+                    <!--<p>你还没有自己的应用，赶快点击<a href="#"style="color: #1AA1FF">“新建应用”</a>开启你的体验之旅</p>-->
+                <!--</div>-->
+                <ul id="list1" onclick="dele(this)">
+                    <li class="pro_1 pro"data-toggle="modal" data-target="#myModal2">
+                        <span>+</span>
+                    </li>
+                    <li class="pro_1">
+                        <div class="hight"></div>
+                        <div class="middle"></div>
+                        <div class="bottom1">
+                            <div class="antion">
+                                <span class="span1"></span>
+                                <span class="span2"></span>
+                                <span class="span3"></span>
+                            </div>
+                            <div class="pro_name">
+                                <div class="title" title="">数据测试1</div>
+                                <form action="" class="form_1" style="display: none">
+                                    <input type="text"value="数据测试1"class="dataName"maxlength="10"/>
+                                    <a class="backImg1"style="cursor: pointer;"><img src="../../images/jj.png" alt=""/></a>
+                                    <a class="backImg2"style="cursor: pointer;"><img src="../../images/xx.jpg" alt=""/></a>
+                                </form>
+                                <span class="lastDate">创建时间：2016-10-31</span>
+                                <button class="rename">重命名</button>
+                                <button class="remove"  data-toggle="modal" data-target="#myModal3" id="zz2">删除</button>
+                            </div>
+                        </div>
+                    </li>
+					<li class="pro_1">
+                        <div class="hight"></div>
+                        <div class="middle"></div>
+                        <div class="bottom1">
+                            <div class="antion">
+                                <span class="span1"></span>
+                                <span class="span2"></span>
+                                <span class="span3"></span>
+                            </div>
+                            <div class="pro_name">
+                                <div class="title" title="">数据测试1</div>
+                                <form action="" class="form_1" style="display: none">
+                                    <input type="text"value="数据测试1"class="dataName"maxlength="10"/>
+                                    <a class="backImg1"style="cursor: pointer;"><img src="../../images/jj.png" alt=""/></a>
+                                    <a class="backImg2"style="cursor: pointer;"><img src="../../images/xx.jpg" alt=""/></a>
+                                </form>
+                                <span class="lastDate">创建时间：2016-10-31</span>
+                                <button class="rename">重命名</button>
+                                <button class="remove"  data-toggle="modal" data-target="#myModal3" id="zz1">删除</button>
+                            </div>
+                        </div>
+                    </li>
+					<li class="pro_1">
+                        <div class="hight"></div>
+                        <div class="middle"></div>
+                        <div class="bottom1">
+                            <div class="antion">
+                                <span class="span1"></span>
+                                <span class="span2"></span>
+                                <span class="span3"></span>
+                            </div>
+                            <div class="pro_name">
+                                <div class="title" title="">数据测试1</div>
+                                <form action="" class="form_1" style="display: none">
+                                    <input type="text"value="数据测试1"class="dataName"maxlength="10"/>
+                                    <a class="backImg1"style="cursor: pointer;"><img src="../../images/jj.png" alt=""/></a>
+                                    <a class="backImg2"style="cursor: pointer;"><img src="../../images/xx.jpg" alt=""/></a>
+                                </form>
+                                <span class="lastDate">创建时间：2016-10-31</span>
+                                <button class="rename">重命名</button>
+                                <button class="remove"  data-toggle="modal" data-target="#myModal3" id="zz">删除</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="pro_1">
+                        <div class="hight"></div>
+                        <div class="middle"></div>
+                        <div class="bottom1">
+                            <div class="antion">
+                                <span class="span1"></span>
+                                <span class="span2"></span>
+                                <span class="span3"></span>
+                            </div>
+                            <div class="pro_name">
+                                <div class="title" title="">数据测试1</div>
+                                <form action="" class="form_1" style="display: none">
+                                    <input type="text"value="数据测试1"class="dataName"maxlength="10"/>
+                                    <a class="backImg1"style="cursor: pointer;"><img src="../../images/jj.png" alt=""/></a>
+                                    <a class="backImg2"style="cursor: pointer;"><img src="../../images/xx.jpg" alt=""/></a>
+                                </form>
+                                <span class="lastDate">创建时间：2016-10-31</span>
+                                <button class="rename">重命名</button>
+                                <button class="remove"  data-toggle="modal" data-target="#myModal3" id="zz">删除</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="pro_1">
+                        <div class="hight"></div>
+                        <div class="middle"></div>
+                        <div class="bottom1">
+                            <div class="antion">
+                                <span class="span1"></span>
+                                <span class="span2"></span>
+                                <span class="span3"></span>
+                            </div>
+                            <div class="pro_name">
+                                <div class="title" title="">数据测试1</div>
+                                <form action="" class="form_1" style="display: none">
+                                    <input type="text"value="数据测试1"class="dataName"maxlength="10"/>
+                                    <a class="backImg1"style="cursor: pointer;"><img src="../../images/jj.png" alt=""/></a>
+                                    <a class="backImg2"style="cursor: pointer;"><img src="../../images/xx.jpg" alt=""/></a>
+                                </form>
+                                <span class="lastDate">创建时间：2016-10-31</span>
+                                <button class="rename">重命名</button>
+                                <button class="remove"  data-toggle="modal" data-target="#myModal3" id="zz">删除</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="clear: both;"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--//模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">选择应用</h3>
+            </div>
+            <div class="modal-body"style="overflow: hidden;width: 620px">
+                <div class="go_next">
+                    <div id="go_next1">
+                        <div class="cl_1"></div>
+                        <div class="cl_2"></div>
+                        <div class="cl_3"></div>
+                    </div>
+                    <p class="p1">新建文本文档</p>
+                </div>
+                <div class="go_next">
+                    <div CLASS="cl_4">
+                        +
+                    </div>
+                    <p class="p2">新建应用</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框二-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel2">选择数据源类型</h4>
+            </div>
+            <div class="modal-body"style="  height: 350px;width: 620px">
+                <h3>选择你想要连接的数据源</h3>
+                <p>选择已有数据源快速直达数据分析操作台</p>
+                <ul class="sourceTypeslist">
+                    <li class="list1">
+                        <img id="img1" src="../../images/yysjy.png" alt=""/>
+                        <span>选择已有数据源</span>
+                    </li>
+                    <li>
+                        <img id="img2"src="../../images/xjsjy.png" alt=""/>
+                        <span>添加数据源</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button"id="btn-q" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button"id="btn-p" class="btn btn-primary" disabled>确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--删除模态框模态框-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel3">友情提示：</h3>
+            </div>
+            <div class="modal-body"style="text-align: center">
+                你确定要删除吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button"id="sure_remove" class="btn btn-primary" >确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--删除模态框模态框-->
+
+<script src="../../js/require/require.js"></script>
+<!-- 引入 jQuery 文件 -->
+<!-- <script src="../../js/jquery/jquery.js"></script> -->
+<!-- 引入 Bootstrap 的 JS 文件 -->
+<!-- <script src="../../js/bootstrap/bootstrap.js"></script> -->
+<!-- <script src="../../js/index2.js"></script> -->
+<script>
+        require.config({
+        baseUrl:"../../js"
+            path:{
+                    "jquery":"jquery/jquery",
+                    "bootstrap":"js/bootstrap/bootstrap",
+                    "index":"js/index2"
+            }   
+        });
+        require(['jquery','bootstrap','index'])
+</script>
+</body>
+</html>

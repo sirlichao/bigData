@@ -1,0 +1,26 @@
+{
+  "status":200,
+  "id":"10001",
+  "tasks":[
+    {
+      "taskName":"员工表",
+      "progress":50
+    },
+    {
+      "taskName":"工资表",
+      "progress":70
+    },
+    {
+      "taskName":"考勤表",
+      "progress":80
+    },
+    {
+      "taskName":"利润表",
+      "progress":100
+    },
+    {
+      "taskName":"汇率表",
+      "progress":100
+    }
+  ]
+}
