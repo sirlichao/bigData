@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome-3.2.1/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/dataAnalysis/index.css"/>
+    <script src="../js/jquery/jquery.js"></script>
+    <script src="../css/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../js/jquery/jquery.js"></script>
+    <script src="../js/jquery/jquery-ui.js"></script>
+    <script src="../js/echarts/dist/echarts.js"></script>
+    <script src="../js/echarts/dist/infographic.js"></script>
+    <script src="../js/bootstrap/bootstrap.js"></script>
+    <script src="../js/dataAnalysis/dataAnalysis.js"></script>
+    <script src="../js/dataAnalysis/addTree.js"></script>
+    <style>
+        #popover{
+            display: none;
+            /*margin-left: 100px;*/
+            width: 330px;
+            height: 220px;
+            position: relative;
+            border: 1px solid #dddddd;
+        }
+        #popover:before{
+            content: "";
+            height: 10px;
+            width: 10px;
+            border: 1px solid #333;
+            position: absolute;
+            top: 110px;
+            left: -6px;
+            background: #fff;
+            border-right: 0px;
+            border-bottom: 0px;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body>
+    <button class="icon-refresh refresh" style="margin: 100px 0 0 100px;"></button>
+    <!--<div id="popover">-->
+        <!--<div class="arrow"></div>-->
+        <!--<div class="popover-inner">-->
+            <!--<h3 class="popover-title"  style="text-align: right;">-->
+                <!--<a href="#"><span class="icon-remove"></span></a>-->
+            <!--</h3>-->
+            <!--<div class="popover-content">-->
+                <!--<p>-->
+                    <!--<label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA"><input type="radio" name="refresh"/>清空缓存</label>-->
+                    <!--<label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA"><input type="radio" name="refresh"/>执行增量元数据更新</label>-->
+                    <!--<div style="margin-left: 20px; font-style: italic; color: #999">这将同步Hive中的缺失表中</div>-->
+                    <!--<label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA"><input type="radio" name="refresh"/>使所有元数据无效并重建索引</label>-->
+                    <!--<div style="margin-left: 20px; font-style: italic; color:#999">警告：这可以是资源和时间密集型。</div>-->
+                    <!--<div style="text-align: right">-->
+                        <!--<button>刷新</button>-->
+                    <!--</div>-->
+                <!--</p>-->
+            <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div id="popover">
+        <div class="popover-inner">
+            <h3 class="popover-title" style="text-align: right;">
+                <a href="#"><span class="icon-remove"></span></a>
+            </h3>
+            <div class="popover-content">
+                <div>
+                    <label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA">
+                        <input type="radio" name="refresh"/>清空缓存
+                    </label>
+                    <label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA">
+                        <input type="radio" name="refresh"/>执行增量元数据更新
+                    </label>
+                    <div style="margin-left: 20px; font-style: italic; color: #999">
+                        这将同步Hive中的缺失表中
+                    </div>
+                    <label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA">
+                        <input type="radio" name="refresh"/>使所有元数据无效并重建索引
+                    </label>
+                    <div style="margin-left: 20px; font-style: italic; color: #999">
+                        警告：这可以是资源和时间密集型。
+                    </div>
+                </div>
+                <div style="text-align: right">
+                    <button>刷新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        $(function(){
+            $('.refresh').on('click',function(e){
+                var x = $(this).offset().top;
+                var y = $(this).offset().left;
+                console.log(x,y);
+                $('#popover').css({
+                    'display':'block',
+                    'position':'absolute',
+                    'top':(x-107)+'px',
+                    'left':(y+35)+'px'
+                });
+            })
+        })
+    </script>
+</body>
+</html>
