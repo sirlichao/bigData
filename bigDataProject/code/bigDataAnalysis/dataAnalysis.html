@@ -49,6 +49,11 @@
             -o-transform: rotate(-45deg);
             transform: rotate(-45deg);
         }
+        #popover label{
+            margin:0px 0px 5px 20px;
+            font-weight: normal;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -658,7 +663,7 @@
                 <a href="#"><span id="remove" class="icon-remove"></span></a>
             </h3>
             <div class="popover-content">
-                    <label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal;">
+                    <label class="radio" style="">
                         <input type="radio" name="refresh" value="cache"/>
                         清空缓存
                     </label>
@@ -677,7 +682,7 @@
                         警告!!：这可以是资源和时间密集型。
                     </div>
                 <div style="text-align: right">
-                    <button class="btn btn-info">刷新</button>
+                    <button class="btn btn-info" id="btnRefresh">刷新</button>
                 </div>
             </div>
         </div>
@@ -724,10 +729,14 @@
         });
         $(function(){
             $('.refresh').on('click',function(e){
-                //获取元素相对于body的位置
+                if($("#popover").is(":hidden")){
+                    //如果隐藏组织冒泡
+                    e.stopPropagation();
+                };
+                console.log($("#popover").is(":hidden"));
+                    //获取元素相对于body的位置
                 var x = $(this).offset().top;
                 var y = $(this).offset().left;
-                console.log(x,y);
                 $('#popover').css({
                     'display':'block',
                     'position':'absolute',
@@ -737,8 +746,28 @@
             })
             $('#remove').on('click',function(){
                 $('#popover').hide();
+                $('input[name="refresh"]').each(function(index,elem){
+                     elem.checked =false;
+                });
             });
-            //试一试
+            $(document).on('click',function(e){
+                e = window.event||e;//兼容IE7
+                obj = $(e.srcElement || e.target);
+                if($(obj).is("#popover")){
+
+                }else{
+                    $('#popover').hide();
+                }
+
+            });
+            $('#popover').on('click',function(e){
+                e.stopPropagation();
+            });
+            $('#btnRefresh').on('click',function(){
+                $.ajax({});//发送请求
+                //获取选中input的value值
+                console.log($('input:checked').val());
+            });
         })
     </script>
 </body>
