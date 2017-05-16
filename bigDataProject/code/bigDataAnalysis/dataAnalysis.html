@@ -21,39 +21,6 @@
         [v-cloak] {
               display: none;
             }
-        /*刷新CSS*/
-        #popover{
-            display: none;
-            background: #fff;
-            /*margin-left: 100px;*/
-            width: 315px;
-            height: 204px;
-            box-shadow: 0 0 5px #ddd;
-            border: 1px solid #dddddd;
-        }
-        #popover:before{
-            content: "";
-            height: 10px;
-            width: 10px;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 5px #ddd;
-            position: absolute;
-            top: 95px;
-            left: -6px;
-            background: #fff;
-            border-right: 0px;
-            border-bottom: 0px;
-            -webkit-transform: rotate(-45deg);
-            -moz-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-            -o-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-        }
-        #popover label{
-            margin:0px 0px 5px 20px;
-            font-weight: normal;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -663,18 +630,18 @@
                 <a href="#"><span id="remove" class="icon-remove"></span></a>
             </h3>
             <div class="popover-content">
-                    <label class="radio" style="">
+                    <label class="radio">
                         <input type="radio" name="refresh" value="cache"/>
                         清空缓存
                     </label>
-                    <label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal;">
+                    <label class="radio">
                         <input type="radio" name="refresh" value="invalidate" />
                         执行增量元数据更新
                     </label>
                     <div style="margin-left: 20px; font-style: italic; color: #5BC0DE">
                         提示：这将同步Hive中的缺失表中
                     </div>
-                    <label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal;">
+                    <label class="radio">
                         <input type="radio" name="refresh" value="invalidateAndFlush"/>
                         使所有元数据无效并重建索引
                     </label>
@@ -689,6 +656,8 @@
     </div>
     <!-- 引入 jQuery 文件 -->
     <script src="../../js/dataAnalysis/dataAssociation.js"></script>
+    <!-- 刷新js文件-->
+    <script src="../../js/dataAnalysis/refresh.js"></script>
     <script src="../../js/vue-2.0.1/dist/vue.js"></script>
     <script src="../../js/vue-resurce/dist/vue-resource.js"></script>
     <script type="application/javascript">
@@ -727,48 +696,7 @@
             });
 
         });
-        $(function(){
-            $('.refresh').on('click',function(e){
-                if($("#popover").is(":hidden")){
-                    //如果隐藏组织冒泡
-                    e.stopPropagation();
-                };
-                console.log($("#popover").is(":hidden"));
-                    //获取元素相对于body的位置
-                var x = $(this).offset().top;
-                var y = $(this).offset().left;
-                $('#popover').css({
-                    'display':'block',
-                    'position':'absolute',
-                    'top':(x-92)+'px',
-                    'left':(y+27)+'px'
-                });
-            })
-            $('#remove').on('click',function(){
-                $('#popover').hide();
-                $('input[name="refresh"]').each(function(index,elem){
-                     elem.checked =false;
-                });
-            });
-            $(document).on('click',function(e){
-                e = window.event||e;//兼容IE7
-                obj = $(e.srcElement || e.target);
-                if($(obj).is("#popover")){
 
-                }else{
-                    $('#popover').hide();
-                }
-
-            });
-            $('#popover').on('click',function(e){
-                e.stopPropagation();
-            });
-            $('#btnRefresh').on('click',function(){
-                $.ajax({});//发送请求
-                //获取选中input的value值
-                console.log($('input:checked').val());
-            });
-        })
     </script>
 </body>
 </html>

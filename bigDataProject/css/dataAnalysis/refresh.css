@@ -1,0 +1,33 @@
+/*刷新CSS*/
+#popover{
+    display: none;
+    background: #fff;
+    /*margin-left: 100px;*/
+    width: 315px;
+    height: 204px;
+    box-shadow: 0 0 5px #ddd;
+    border: 1px solid #dddddd;
+}
+#popover:before{
+    content: "";
+    height: 10px;
+    width: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px #ddd;
+    position: absolute;
+    top: 95px;
+    left: -6px;
+    background: #fff;
+    border-right: 0px;
+    border-bottom: 0px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+#popover label{
+    margin:0px 0px 5px 20px;
+    font-weight: normal;
+    cursor: pointer;
+}
