@@ -41,31 +41,26 @@
             -o-transform: rotate(-45deg);
             transform: rotate(-45deg);
         }
+        .animation{
+            background: red;
+            border: 1px solid #dddddd;
+            animation:refresh 1s linear infinite;
+        }
+        @-webkit-keyframes refresh {
+            0%{
+                transform: rotate(0deg);
+            }
+            20%{transform: rotate(72deg)}
+            40%{transform: rotate(144deg)}
+            60%{transform: rotate(216deg)}
+            80%{transform: rotate(288deg)}
+            100%{transform: rotate(360deg)}
+        }
     </style>
 </head>
 <body>
-    <button class="icon-refresh refresh" style="margin: 100px 0 0 100px;"></button>
-    <!--<div id="popover">-->
-        <!--<div class="arrow"></div>-->
-        <!--<div class="popover-inner">-->
-            <!--<h3 class="popover-title"  style="text-align: right;">-->
-                <!--<a href="#"><span class="icon-remove"></span></a>-->
-            <!--</h3>-->
-            <!--<div class="popover-content">-->
-                <!--<p>-->
-                    <!--<label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA"><input type="radio" name="refresh"/>清空缓存</label>-->
-                    <!--<label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA"><input type="radio" name="refresh"/>执行增量元数据更新</label>-->
-                    <!--<div style="margin-left: 20px; font-style: italic; color: #999">这将同步Hive中的缺失表中</div>-->
-                    <!--<label class="radio" style="margin:0px 0px 5px 20px; font-weight: normal; color: #BABABA"><input type="radio" name="refresh"/>使所有元数据无效并重建索引</label>-->
-                    <!--<div style="margin-left: 20px; font-style: italic; color:#999">警告：这可以是资源和时间密集型。</div>-->
-                    <!--<div style="text-align: right">-->
-                        <!--<button>刷新</button>-->
-                    <!--</div>-->
-                <!--</p>-->
-            <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <button class="icon-refresh refresh animation" style="margin: 100px 0 0 100px;"></button>
+
     <div id="popover">
         <div class="popover-inner">
             <h3 class="popover-title" style="text-align: right;">
@@ -95,18 +90,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
