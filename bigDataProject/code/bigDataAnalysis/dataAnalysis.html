@@ -565,7 +565,7 @@
                         <div class="dsg-modal">
                             <div class="dsg-modal-wrap">
                                 <div class="dsg-modal-dialog">
-                                    <div class="dsg-modal-content animation">
+                                    <div class="dsg-modal-content">
                                         <div class="dsg-modal-header">
                                             <span class="icon-Setthewindow"></span>
                                             <button type="button" class="close">
@@ -628,7 +628,7 @@
                     <span class="tip-warp"  style="display: none;">关联已刷新</span>
                     <span class="redstar" style="color: red">*</span>
                     <input type="text" placeholder="在这里输入保存的名称"/>
-                    <button class="btn btn-info">确认</button>
+                    <button id="btnAdd" class="btn btn-info">确认</button>
                 </div>
             </div>
         </div>
@@ -706,7 +706,9 @@
             });
 
         });
-
+        $('#btnAdd').on('click',function(){
+            $.ajax()
+        })
     </script>
 </body>
 </html>

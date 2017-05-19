@@ -1,0 +1,15 @@
+{
+  "code":200,
+  "dataTable":[
+    {
+      "tableName":"环境工程",
+      "tableDimension":["台风等级","台风风速"],
+      "tableMetric":["破坏力","台风区域"]
+    },
+    {
+      "tableName":"超市零售",
+      "tableDimension":["订单日期","订单ID"],
+      "tableMetric":["邮寄方式","订单数量","销售额"]
+    }
+  ]
+}
