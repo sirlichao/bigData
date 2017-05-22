@@ -1,0 +1,21 @@
+//模态框的选中的js
+$('#img1').click(function(){
+    $(this).attr("src","../../images/yzwc.png");
+    $("#img2").attr("src","../../images/xjsjy.png");
+    $("#btn-p").removeAttr("disabled");
+});
+$('#img2').click(function(){
+    $(this).attr("src","../../images/yzwc.png");
+    $("#img1").attr("src","../../images/yysjy.png");
+    $("#btn-p").removeAttr("disabled");
+    $("#btn-p").click(function(){
+        $("#myModal2").modal('hide');
+        $("#img2").attr("src","../../images/xjsjy.png");
+        $("#img1").attr("src","../../images/yysjy.png");
+        //window.
+    });
+    $("#btn-q").click(function(){
+        $("#img2").attr("src","../../images/xjsjy.png");
+        $("#img1").attr("src","../../images/yysjy.png");
+    });
+});

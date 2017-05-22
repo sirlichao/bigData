@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2016/11/3.
  */
-define(
     //模态框的选中的js
 $('#img1').click(function(){
     $(this).attr("src","../images/yzwc.png");
@@ -22,7 +21,7 @@ $('#img2').click(function(){
         console.log('ahsakshaks');
         $("#img2").attr("src","../images/xjsjy.png");
         $("#img1").attr("src","../images/yysjy.png");
-    })
+    });
 });
 
 //重命名设置
@@ -38,13 +37,13 @@ $(".backImg2").click(function(e){
 });
 $(".backImg1").click(function(e){
     var val_1=$(this).parent().find(".dataName")[0].value;
-    console.log($(this).parent().find(".title"))
+    console.log($(this).parent().find(".title"));
     $(this).parent().parent().find(".title").html(val_1).show();
     $(this).parent().hide();
-})
+});
 $('.antion').bind('click',function(){
     window.location.href="dataAnalysis.html"
-})
+});
 //删除的设置
 ///动画效果
 $(function(){
@@ -56,8 +55,8 @@ $(function(){
         $(this).find(".span3").css({
             'animation':'none'
         });
-    })
-})
+    });
+});
 $(function(){
     $('.pro_1').hover(function(){
 
@@ -67,10 +66,9 @@ $(function(){
     },function(){
         $(this).find(".span2").css({
             'animation':'none'
-        })
-        ;
-    })
-})
+        });
+    });
+});
 $(function(){
     $('.pro_1').hover(function(){
 
@@ -80,13 +78,10 @@ $(function(){
     },function(){
         $(this).find(".span1").css({
             'animation':'none'
-        })
+        });
         ;
-    })
-})
-
-
-
+    });
+});
 var flag = true;
 function dele(e) {
     var e = window.event || event;
@@ -107,23 +102,6 @@ function dele(e) {
     });
 
 }
-//function deleApply(obj) {
-//    sureDelete(obj);
-//}
-//
-//function sureDelete(obj){
-//    $("#sure_remove").click(function(){
-//        $('#myModal3').modal('hide');
-//        $(obj).parent().parent().parent().remove();
-//    });
-//
-//}
-//
-//$("#sure_remove").on("click",sureDelete);
-
-
-
-
 $(function() {
     $("#dropDown").click(function() {
         if($(this).prev("input.html").val() != "") {
@@ -136,7 +114,6 @@ $(function() {
                     $(".dashboard span").text(data.dashboard);
                     $(".chart span").text(data.chart);
                     console.log(data);
-
                     $(".searchHead").css({
                         'display': 'block'
                     });
@@ -155,8 +132,7 @@ $(function() {
         } else {
             $(".down").slideDown(500);
             upFlag = true;
-            $(this).find("span").text("^收起")
-        }
+            $(this).find("span").text("^收起");
+        };
     });
-})
-)
+});
