@@ -16,6 +16,12 @@
     <script src="../../js/echarts/dist/infographic.js"></script>
     <script src="../../js/bootstrap/bootstrap.js"></script>
     <script src="../../js/dataAnalysis/dataAnalysis.js"></script>
+    <script src="../../js/dataAnalysis/charts/bar.js"></script>
+    <script src="../../js/dataAnalysis/charts/pieChart.js"></script>
+    <script src="../../js/dataAnalysis/charts/scatterChart.js"></script>
+    <script src="../../js/dataAnalysis/charts/lineChart.js"></script>
+    <script src="../../js/dataAnalysis/charts/louDouChart.js"></script>
+    <script src="../../js/dataAnalysis/charts/gaueChart.js"></script>
     <script src="../../js/dataAnalysis/addTree.js"></script>
     <style>
         [v-cloak] {
@@ -342,29 +348,29 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="drag-photo col-md-2" style="">
-                            <ul class="nav nav-tabs" role="tablist" style="border: 0px;background: #dddddd">
-                                <li role="presentation" class="active" style="width: 80px"><a href="#freqently" role="tab" data-toggle="tab" style="border: 0px">常用的</a></li>
-                                <li role="presentation" style="width: 80px"><a href="#all" role="tab" data-toggle="tab" style="border: 0px">全部</a></li>
+                        <div class="drag-photo col-md-2 row">
+                            <ul class="nav nav-tabs" role="tablist" style="border: 0px;background: #dddddd;height: 40px;">
+                                <li role="presentation" class="active col-md-6" style="margin: 0;"><a href="#freqently" role="tab" data-toggle="tab" style="border: 0px">常用的</a></li>
+                                <li role="presentation" class="col-md-6" style="margin: 0;"><a href="#all" role="tab" data-toggle="tab" style="border: 0px">全部</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="freqently">
                                     <!--<div><img src="../../images/dataAnalysis/1006.svg" alt=""/></div>-->
                                     <!--<div><img src="../../images/dataAnalysis/1101.svg" alt=""/></div>-->
                                     <!--<div><img src="../../images/dataAnalysis/1105.svg" alt=""/></div>-->
-                                    <div id="pie"><img src="../../images/dataAnalysis/2001.svg" alt=""/></div>
-                                    <div id="scatter"><img src="../../images/dataAnalysis/3001.svg" alt=""/></div>
-                                    <div id="line"><img src="../../images/dataAnalysis/3101.svg" alt=""/></div>
-                                    <div id="stepLine"><img src="../../images/dataAnalysis/3103.svg" alt=""/></div>
+                                    <div id="pie" title="饼图"><img src="../../images/dataAnalysis/2001.svg" alt=""/></div>
+                                    <div id="scatter" title="散点"><img src="../../images/dataAnalysis/3001.svg" alt=""/></div>
+                                    <div id="line" title="折线图"><img src="../../images/dataAnalysis/3101.svg" alt=""/></div>
+                                    <div id="stepLine" title="梯形图"><img src="../../images/dataAnalysis/3103.svg" alt=""/></div>
                                     <!--<div><img src="../../images/dataAnalysis/3301.svg" alt=""/></div>-->
-                                    <div id="bar_compositionX"><img src="../../images/dataAnalysis/3302.svg" alt=""/></div>
-                                    <div id="bar"><img src="../../images/dataAnalysis/3303.svg" alt=""/></div>
+                                    <div id="bar_compositionX" title="柱状叠加"><img src="../../images/dataAnalysis/3302.svg" alt=""/></div>
+                                    <div id="bar" title="柱状图"><img src="../../images/dataAnalysis/3303.svg" alt=""/></div>
                                     <!--<div><img src="../../images/dataAnalysis/3401.svg" alt=""/></div>-->
-                                    <div id="bar_compositionY"><img src="../../images/dataAnalysis/3402.svg" alt=""/></div>
-                                    <div id="changeBar"><img src="../../images/dataAnalysis/3403.svg" alt=""/></div>
-                                    <div><img src="../../images/dataAnalysis/3601.svg" alt=""/></div>
-                                    <div id="pileLine"><img src="../../images/dataAnalysis/4101.svg" alt=""/></div>
-                                    <div id="pileLineM"><img src="../../images/dataAnalysis/4102.svg" alt=""/></div>
+                                    <div id="bar_compositionY" title="Y轴叠加图"><img src="../../images/dataAnalysis/3402.svg" alt=""/></div>
+                                    <div id="changeBar" title="柱状图"><img src="../../images/dataAnalysis/3403.svg" alt=""/></div>
+                                    <div title="气泡图"><img src="../../images/dataAnalysis/3601.svg" alt=""/></div>
+                                    <div id="pileLine" title="堆叠图"><img src="../../images/dataAnalysis/4101.svg" alt=""/></div>
+                                    <div id="pileLineM" title="多折线堆叠图"><img src="../../images/dataAnalysis/4102.svg" alt=""/></div>
                                     <!--<div><img src="../../images/dataAnalysis/4103.svg" alt=""/></div>-->
                                     <!--<div id="map"><img src="../../images/dataAnalysis/5001.svg" alt=""/></div>-->
                                     <!--<div><img src="../../images/dataAnalysis/10002.svg" alt=""/></div>-->
