@@ -1,0 +1,8 @@
+{
+  "status":200,
+  "dimension":["dim1","dim2","dim2"],
+  "measure":["mea1","mea2","mea3"],
+  "dimensionData":[],
+  "measureData":[]
+
+}
